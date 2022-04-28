@@ -28,6 +28,7 @@ urlpatterns = [
     re_path(r'^login$', views.login, name='login'),
     re_path(r'^$', views.User_index, name='User_index'),
     re_path(r'^User_RegistrationForm$', views.User_RegistrationForm, name='User_RegistrationForm'),
+    re_path(r'^User_LoginForm$', views.User_LoginForm, name='User_LoginForm'),
 
     
 ]

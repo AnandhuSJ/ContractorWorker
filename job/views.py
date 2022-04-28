@@ -27,3 +27,8 @@ def User_index(request):
 def User_RegistrationForm(request):
         
        return render(request, 'User_RegistrationForm.html')
+
+
+def User_LoginForm(request):
+        
+       return render(request, 'User_LoginForm.html')

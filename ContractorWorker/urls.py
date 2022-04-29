@@ -25,10 +25,23 @@ from django.urls import re_path
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
-    re_path(r'^login$', views.login, name='login'),
-    re_path(r'^$', views.User_index, name='User_index'),
-    re_path(r'^User_RegistrationForm$', views.User_RegistrationForm, name='User_RegistrationForm'),
-    re_path(r'^User_LoginForm$', views.User_LoginForm, name='User_LoginForm'),
+     re_path(r'^$', views.Login, name='Login'),
+     re_path(r'^RegistrationForm$', views.RegistrationForm, name='RegistrationForm'),
+   
+
+   ######## User Module ########
+     re_path(r'^User_index$', views.User_index, name='User_index'),
+     re_path(r'^User_MyProfile$', views.User_MyProfile, name='User_MyProfile'),
+     re_path(r'^User_MyRegister$', views.User_MyRegister, name='User_MyRegister'),
+     re_path(r'^User_ViewWorkDetails$', views.User_ViewWorkDetails, name='User_ViewWorkDetails'),
+     re_path(r'^User_WorkerDetails_cards$', views.User_WorkerDetails_cards, name='User_WorkerDetails_cards'),
+     re_path(r'^User_ActiveWorkerDetails_table$', views.User_ActiveWorkerDetails_table, name='User_ActiveWorkerDetails_table'),
+     re_path(r'^User_PreviousWorkerDetails_table$', views.User_PreviousWorkerDetails_table, name='User_PreviousWorkerDetails_table'),
+     re_path(r'^User_ContractorDetails_cards$', views.User_ContractorDetails_cards, name='User_ContractorDetails_cards'),
+     re_path(r'^User_ActiveContractorDetails_table$', views.User_ActiveContractorDetails_table, name='User_ActiveContractorDetails_table'),
+     re_path(r'^User_PreviousContractorDetails_table$', views.User_PreviousContractorDetails_table, name='User_PreviousContractorDetails_table'),
+    
+    
 
     
 ]

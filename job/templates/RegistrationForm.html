@@ -19,12 +19,12 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}"/>
   </head>
   <body>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth">
+        <div class="content-wrapper d-flex align-items-center auth" style="background: url('/static/assets/images/Signupimage.jpg') 100% 100% no-repeat fixed;background-size: cover;">
           <div class="row flex-grow mb-5">
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
@@ -90,9 +90,9 @@
                     </div>
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
+                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{% url 'Login' %}">SIGN UP</a>
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{% url 'User_LoginForm' %}" class="text-primary">Login</a>
+                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{% url 'Login' %}" class="text-primary">Login</a>
                   </div>
                 </form>
               </div>

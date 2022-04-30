@@ -41,32 +41,50 @@ def User_ViewWorkDetails(request):
         
        return render(request, 'User_ViewWorkDetails.html')
 
-def User_WorkerDetails_cards(request):
+def User_WorkerDetails_table(request):
         
-       return render(request, 'User_WorkerDetails_cards.html')
+       return render(request, 'User_WorkerDetails_table.html')
 
-def User_ActiveWorkerDetails_table(request):
+def User_ContractorDetails_table(request):
         
-       return render(request, 'User_ActiveWorkerDetails_table.html') 
+       return render(request, 'User_ContractorDetails_table.html')
 
-def User_PreviousWorkerDetails_table(request):
+
+
+def SuperAdmin_index(request):
         
-       return render(request, 'User_PreviousWorkerDetails_table.html')              
+       return render(request, 'SuperAdmin_index.html')
 
-
-def User_ContractorDetails_cards(request):
+def SuperAdmin_WorkerWorkDetails_cards(request):
         
-       return render(request, 'User_ContractorDetails_cards.html')     
+       return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html')
 
-
-def User_ActiveContractorDetails_table(request):
+def SuperAdmin_ActiveWorkerWorkDetails_table(request):
         
-       return render(request, 'User_ActiveContractorDetails_table.html')  
+       return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html') 
 
-
-def User_PreviousContractorDetails_table(request):
+def SuperAdmin_PreviousWorkerWorkDetails_table(request):
         
-       return render(request, 'User_PreviousContractorDetails_table.html')
+       return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html')              
+
+
+def SuperAdmin_ContractorWorkDetails_cards(request):
+        
+       return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html')     
+
+
+def SuperAdmin_ActiveContractorWorkDetails_table(request):
+        
+       return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html')  
+
+
+def SuperAdmin_PreviousContractorWorkDetails_table(request):
+        
+       return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html')
+
+def SuperAdmin_UserDetails(request):
+        
+       return render(request, 'SuperAdmin_UserDetails.html')       
 
 
 

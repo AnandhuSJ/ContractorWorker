@@ -34,12 +34,18 @@ urlpatterns = [
      re_path(r'^User_MyProfile$', views.User_MyProfile, name='User_MyProfile'),
      re_path(r'^User_MyRegister$', views.User_MyRegister, name='User_MyRegister'),
      re_path(r'^User_ViewWorkDetails$', views.User_ViewWorkDetails, name='User_ViewWorkDetails'),
-     re_path(r'^User_WorkerDetails_cards$', views.User_WorkerDetails_cards, name='User_WorkerDetails_cards'),
-     re_path(r'^User_ActiveWorkerDetails_table$', views.User_ActiveWorkerDetails_table, name='User_ActiveWorkerDetails_table'),
-     re_path(r'^User_PreviousWorkerDetails_table$', views.User_PreviousWorkerDetails_table, name='User_PreviousWorkerDetails_table'),
-     re_path(r'^User_ContractorDetails_cards$', views.User_ContractorDetails_cards, name='User_ContractorDetails_cards'),
-     re_path(r'^User_ActiveContractorDetails_table$', views.User_ActiveContractorDetails_table, name='User_ActiveContractorDetails_table'),
-     re_path(r'^User_PreviousContractorDetails_table$', views.User_PreviousContractorDetails_table, name='User_PreviousContractorDetails_table'),
+     re_path(r'^User_WorkerDetails_table$', views.User_WorkerDetails_table, name='User_WorkerDetails_table'),
+     re_path(r'^User_ContractorDetails_table$', views.User_ContractorDetails_table, name='User_ContractorDetails_table'),
+
+
+     re_path(r'^SuperAdmin_index$', views.SuperAdmin_index, name='SuperAdmin_index'),
+     re_path(r'^SuperAdmin_WorkerWorkDetails_cards$', views.SuperAdmin_WorkerWorkDetails_cards, name='SuperAdmin_WorkerWorkDetails_cards'),
+     re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_table$', views.SuperAdmin_ActiveWorkerWorkDetails_table, name='SuperAdmin_ActiveWorkerWorkDetails_table'),
+     re_path(r'^SuperAdmin_PreviousWorkerWorkDetails_table$', views.SuperAdmin_PreviousWorkerWorkDetails_table, name='SuperAdmin_PreviousWorkerWorkDetails_table'),
+     re_path(r'^SuperAdmin_ContractorWorkDetails_cards$', views.SuperAdmin_ContractorWorkDetails_cards, name='SuperAdmin_ContractorWorkDetails_cards'),
+     re_path(r'^SuperAdmin_ActiveContractorWorkDetails_table$', views.SuperAdmin_ActiveContractorWorkDetails_table, name='SuperAdmin_ActiveContractorWorkDetails_table'),
+     re_path(r'^SuperAdmin_PreviousContractorWorkDetails_table$', views.SuperAdmin_PreviousContractorWorkDetails_table, name='SuperAdmin_PreviousContractorWorkDetails_table'),
+     re_path(r'^SuperAdmin_UserDetails$', views.SuperAdmin_UserDetails, name='SuperAdmin_UserDetails'),
     
     
 

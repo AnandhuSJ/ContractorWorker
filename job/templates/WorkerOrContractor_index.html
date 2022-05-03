@@ -81,23 +81,29 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'User_MyProfile' %}">
+              <a class="nav-link" href="">
                 <span class="icon-bg"><i class="mdi mdi-account-box-outline menu-icon"></i></span>
-                <span class="menu-title">My Profile</span>
+                <span class="menu-title">Add Work Details</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'User_MyRegister' %}">
+              <a class="nav-link" href="{% url 'WorkerOrContractor_ViewWorkDetails' %}">
                 <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
-                <span class="menu-title">My Register</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'User_ViewWorkDetails' %}">
-                <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">View Work Details</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'WorkerOrContractor_ViewFeedbackDetails' %}">
+                <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                <span class="menu-title">View Feedback Details</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'WorkerOrContractor_MyProfile' %}">
+                  <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                  <span class="menu-title">My Profile</span>
+                </a>
+              </li>
           </ul>
         </nav>
         <!-- partial -->

@@ -37,6 +37,10 @@ def User_MyRegister(request):
         
        return render(request, 'User_MyRegister.html')
 
+def User_PostFeedback(request):
+        
+       return render(request, 'User_PostFeedback.html')       
+
 def User_ViewWorkDetails(request):
         
        return render(request, 'User_ViewWorkDetails.html')
@@ -85,6 +89,32 @@ def SuperAdmin_PreviousContractorWorkDetails_table(request):
 def SuperAdmin_UserDetails(request):
         
        return render(request, 'SuperAdmin_UserDetails.html')       
+
+
+
+
+def WorkerOrContractor_index(request):
+        
+       return render(request, 'WorkerOrContractor_index.html')  
+
+
+def WorkerOrContractor_ViewWorkDetails(request):
+        
+       return render(request, 'WorkerOrContractor_ViewWorkDetails.html') 
+
+def WorkerOrContractor_UpdateWorkDetails(request):
+        
+       return render(request, 'WorkerOrContractor_UpdateWorkDetails.html')             
+
+
+def WorkerOrContractor_ViewFeedbackDetails(request):
+        
+       return render(request, 'WorkerOrContractor_ViewFeedbackDetails.html')     
+
+
+def WorkerOrContractor_MyProfile(request):
+        
+       return render(request, 'WorkerOrContractor_MyProfile.html')         
 
 
 

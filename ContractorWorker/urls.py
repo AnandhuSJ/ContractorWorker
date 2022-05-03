@@ -33,6 +33,7 @@ urlpatterns = [
      re_path(r'^User_index$', views.User_index, name='User_index'),
      re_path(r'^User_MyProfile$', views.User_MyProfile, name='User_MyProfile'),
      re_path(r'^User_MyRegister$', views.User_MyRegister, name='User_MyRegister'),
+     re_path(r'^User_PostFeedback$', views.User_PostFeedback, name='User_PostFeedback'),
      re_path(r'^User_ViewWorkDetails$', views.User_ViewWorkDetails, name='User_ViewWorkDetails'),
      re_path(r'^User_WorkerDetails_table$', views.User_WorkerDetails_table, name='User_WorkerDetails_table'),
      re_path(r'^User_ContractorDetails_table$', views.User_ContractorDetails_table, name='User_ContractorDetails_table'),
@@ -46,6 +47,13 @@ urlpatterns = [
      re_path(r'^SuperAdmin_ActiveContractorWorkDetails_table$', views.SuperAdmin_ActiveContractorWorkDetails_table, name='SuperAdmin_ActiveContractorWorkDetails_table'),
      re_path(r'^SuperAdmin_PreviousContractorWorkDetails_table$', views.SuperAdmin_PreviousContractorWorkDetails_table, name='SuperAdmin_PreviousContractorWorkDetails_table'),
      re_path(r'^SuperAdmin_UserDetails$', views.SuperAdmin_UserDetails, name='SuperAdmin_UserDetails'),
+
+
+     re_path(r'^WorkerOrContractor_index$', views.WorkerOrContractor_index, name='WorkerOrContractor_index'),
+     re_path(r'^WorkerOrContractor_ViewWorkDetails$', views.WorkerOrContractor_ViewWorkDetails, name='WorkerOrContractor_ViewWorkDetails'),
+     re_path(r'^WorkerOrContractor_UpdateWorkDetails$', views.WorkerOrContractor_UpdateWorkDetails, name='WorkerOrContractor_UpdateWorkDetails'),
+     re_path(r'^WorkerOrContractor_ViewFeedbackDetails$', views.WorkerOrContractor_ViewFeedbackDetails, name='WorkerOrContractor_ViewFeedbackDetails'),
+     re_path(r'^WorkerOrContractor_MyProfile$', views.WorkerOrContractor_MyProfile, name='WorkerOrContractor_MyProfile'),
     
     
 

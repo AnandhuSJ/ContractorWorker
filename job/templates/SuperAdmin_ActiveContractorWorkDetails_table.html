@@ -3,87 +3,114 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Active Workers</h4>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Worker ID</th>
-            <th>Worker Name</th>
-            <th>Worker Type</th>
-            <th>Skills</th>
-            <th>Experience</th>
-            <th>Address1</th>
-            <th>Address2</th>
-            <th>City and Pin</th>
-            <th>Aadhar No</th>
-            <th>Cost days/Hrs</th>
-            <th>User Type</th>
-            <th>Status</th>
-            <th>Update</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>01</td>
-            <td>Jacob</td>
-            <td>Painter</td>
-            <td>Furniture Making</td>
-            <td>8 years</td>
-            <td>2nd Cross</td>
-            <td>Vallam</td>
-            <td>thanjavur-623431</td>
-            <td>4565464566</td>
-            <td>2500</td>
-            <td>Worker</td>
-            <td>Approval</td>
-            <td>
-              <select class="badge badge-outline-primary bg-dark text-light" name="status" required>
-                <option style="display: none" value=""></option>
+      <div class="form-group">
+        <input type="text" class="form-control" onkeyup="myFunction()" id="search" name="search" autocomplete="off"
+          placeholder="Search...">
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Contractor ID</th>
+              <th>Contractor Name</th>
+              <th>Contractor Type</th>
+              <th>Skills</th>
+              <th>Experience</th>
+              <th>Address1</th>
+              <th>Address2</th>
+              <th>City and Pin</th>
+              <th>Aadhar No</th>
+              <th>Cost days/Hrs</th>
+              <th>User Type</th>
+              <th>Status</th>
+              <th>Update</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>Jacob</td>
+              <td>Painter</td>
+              <td>Furniture Making</td>
+              <td>8 years</td>
+              <td>2nd Cross</td>
+              <td>Vallam</td>
+              <td>thanjavur-623431</td>
+              <td>4565464566</td>
+              <td>2500</td>
+              <td>Worker</td>
+              <td>Approval</td>
+              <td>
+                <select class="badge badge-outline-primary bg-dark text-light" name="status" required>
+                  <option style="display: none" value=""></option>
 
 
-                <option value="Active">Pending</option>
-                <option value="Resign">Approval</option>
-                <option value="Resign">Reject</option>
+                  <option value="Active">Pending</option>
+                  <option value="Resign">Approval</option>
+                  <option value="Resign">Reject</option>
 
-              </select>
-            </td>
-            <td>
-              <button type="submit" class="btn btn-outline-primary btn-icon-text">
-                <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
-            </td>
-          </tr>
-          <tr>
-            <td>02</td>
-            <td>Messsy</td>
-            <td>Carpenter</td>
-            <td>Mathematical Calculation</td>
-            <td>6 years</td>
-            <td>2nd Cross</td>
-            <td>Vallam</td>
-            <td>thanjavur-623431</td>
-            <td>56576535325</td>
-            <td>2200</td>
-            <td>Worker</td>
-            <td>Approval</td>
-            <td>
-              <select class="badge badge-outline-primary bg-dark text-light" name="status" required>
-                <option style="display: none" value=""></option>
+                </select>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                  <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>Messsy</td>
+              <td>Carpenter</td>
+              <td>Mathematical Calculation</td>
+              <td>6 years</td>
+              <td>2nd Cross</td>
+              <td>Vallam</td>
+              <td>thanjavur-623431</td>
+              <td>56576535325</td>
+              <td>2200</td>
+              <td>Worker</td>
+              <td>Approval</td>
+              <td>
+                <select class="badge badge-outline-primary bg-dark text-light" name="status" required>
+                  <option style="display: none" value=""></option>
 
 
-                <option value="Active">Pending</option>
-                <option value="Resign">Approval</option>
-                <option value="Resign">Reject</option>
+                  <option value="Active">Pending</option>
+                  <option value="Resign">Approval</option>
+                  <option value="Resign">Reject</option>
 
-              </select>
-            </td>
-            <td>
-              <button type="submit" class="btn btn-outline-primary btn-icon-text">
-                <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                </select>
+              </td>
+              <td>
+                <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                  <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-{% endblock %}
+
+  <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+  </script>
+  {% endblock %}

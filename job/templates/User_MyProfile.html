@@ -1,147 +1,160 @@
 {% extends 'User_index.html'%} {% load static %} {% block content %}
 
 <style>
-    #choose::file-selector-button {
-        background-color: rgb(37, 125, 207);
-        
-        
-    }
+  #choose::file-selector-button {
+    background-color: rgb(37, 125, 207);
+
+
+  }
 </style>
 
 
 
 
 <div class="row">
-<div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
-  <div class="card mt-3 mb-5">
-    <div class="card-body">
-      <form class="form-sample">
-        <div class="row">
-          <div class="col-8 col-sm-8 col-md-10 col-lg-10 mt-3">
-            <h4 class="card-description text-dark font-weight-normal"> Update User Contact Details </h4>
+  <div class="col-12 col-sm-12 col-md-12 col-lg-9 grid-margin">
+    <div class="card mt-3 mb-5">
+      <div class="card-body">
+        <form class="form-sample">
+          <div class="row">
+            <div class="col-8 col-sm-8 col-md-10 col-lg-10 mt-3">
+              <h4 class="card-description text-dark font-weight-normal"> Update User Contact Details </h4>
+            </div>
+            <div class="col-4 col-sm-4 col-md-2 col-lg-2">
+              <img src="" id="image" class="img-fluid rounded-circle mb-3 " alt="image"
+                style="margin-right:20px;height:100px; width:100px;" data-toggle="modal" data-target="#myModal91">
+            </div>
           </div>
-          <div class="col-4 col-sm-4 col-md-2 col-lg-2">
-            <img src="" id="image" class="img-fluid rounded-circle mb-3 " alt="image" style="margin-right:20px;height:100px; width:100px;"
-            data-toggle="modal" data-target="#myModal91">
-          </div>
-        </div>
-        <p class="card-description text-dark font-weight-normal"> Personal details </p>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="form-group row">
-              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">ID:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <p class="mt-2 text-dark font-weight-normal">01</p>
+          <p class="card-description text-dark font-weight-normal"> Personal details </p>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">ID:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">01</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">Full
+                  Name:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">Anandhu Shaji</p>
+                </div>
               </div>
             </div>
           </div>
-        
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="form-group row">
-              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Full Name:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <p class="mt-2 text-dark font-weight-normal">Anandhu Shaji</p>
+
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">Email:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">anandhusj048@gmail.com</p>
+                </div>
               </div>
             </div>
-          </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">Password:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">anandhu123</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="form-group row">
-              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Email:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <p class="mt-2 text-dark font-weight-normal">anandhusj048@gmail.com</p>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">Mobile:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">8797868585</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">AadharNo:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">12321546757</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="form-group row">
-              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Password:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <p class="mt-2 text-dark font-weight-normal">anandhu123</p>
-              </div>
-            </div>
+          <div class="row">
+            <center>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </center>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="form-group row">
-              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Mobile:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <p class="mt-2 text-dark font-weight-normal">8797868585</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-            <div class="form-group row">
-              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">AadharNo:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <p class="mt-2 text-dark font-weight-normal">12321546757</p>
-              </div>
-            </div>
-          </div>
-          </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 
-  
-
-  
 
 
-<form method="post" action="" enctype="multipart/form-data">
-  <input type="hidden" name="csrfmiddlewaretoken" value="io9a1FUexAEVfui2Q4D0OqJa4eN9bM5ucKVA7yr7EPJzYIthYeRAjqKXIff69ljC">
-<div class="modal" id="myModal91">
-    <div class="modal-dialog">
+
+
+
+  <form method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="csrfmiddlewaretoken"
+      value="io9a1FUexAEVfui2Q4D0OqJa4eN9bM5ucKVA7yr7EPJzYIthYeRAjqKXIff69ljC">
+    <div class="modal" id="myModal91">
+      <div class="modal-dialog">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Profile picture</h4>
-                <button type="button" style="background-color:transparent;border:none;color: white;" class="close" data-dismiss="modal">&times;</button>
-            </div>
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Profile picture</h4>
+            <button type="button" style="background-color:transparent;border:none;color: white;" class="close"
+              data-dismiss="modal">&times;</button>
+          </div>
 
-         
-            <!-- Modal body -->
-            <div class="modal-body">
-            
-                <div class="card" style="height:auto;">
-                    <div class="card-body">
-                        <p> A picture helps people recognize you and lets you know when you’re signed in to your account </p>
-                        <hr>
 
-                        <div class="row pt-4">
-                            <div class="col-3 col-sm-4 col-md-4 col-lg-4 "></div>
-                                <div class="col-9 col-sm-8 col-md-8 col-lg-8">
-                                    <img src="{% static 'assets/images/faces/face2.jpg' %}" id="image" class="img-fluid rounded-circle mb-3 " alt="image" style="height:120px; width:120px; " >
-                                </div>
-                                                    
-                        </div>   
-                    </div>
-                    
+          <!-- Modal body -->
+          <div class="modal-body">
+
+            <div class="card" style="height:auto;">
+              <div class="card-body">
+                <p> A picture helps people recognize you and lets you know when you’re signed in to your account </p>
+                <hr>
+
+                <div class="row pt-4">
+                  <div class="col-3 col-sm-4 col-md-4 col-lg-4 "></div>
+                  <div class="col-9 col-sm-8 col-md-8 col-lg-8">
+                    <img src="{% static 'assets/images/faces/face2.jpg' %}" id="image"
+                      class="img-fluid rounded-circle mb-3 " alt="image" style="height:120px; width:120px; ">
+                  </div>
+
                 </div>
+              </div>
+
             </div>
+          </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer justify-content-between">
-                
+          <!-- Modal footer -->
+          <div class="modal-footer justify-content-between">
 
-                    <button type="submit"  class="btn btn-outline-primary btn-icon-text"  style="width:220px;overflow:hidden ">
-                    <input type="file" id="choose" name="filename" ></button>
 
-                    <button type="submit"  class="btn btn-outline-success btn-icon-text" style="width:190px; ">
-                    <i class="mdi  mdi-reload text-success " style="font-size:18px; "></i>Update</button>
-                
-            
-            </div>
-            
+            <button type="submit" class="btn btn-outline-primary btn-icon-text" style="width:220px;overflow:hidden ">
+              <input type="file" id="choose" name="filename"></button>
+
+            <button type="submit" class="btn btn-outline-success btn-icon-text" style="width:190px; ">
+              <i class="mdi  mdi-reload text-success " style="font-size:18px; "></i>Update</button>
+
+
+          </div>
+
         </div>
+      </div>
     </div>
-</div>
-</form>
-  
+  </form>
 
-{% endblock %}
+
+  {% endblock %}

@@ -32,38 +32,48 @@
                 <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                 <form class="pt-3">
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
+                    <input type="text" class="form-control form-control-lg" name="username" id="exampleInputUsername1" placeholder="Username">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg" name="psswd" id="exampleInputPassword1" placeholder="Password">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                    <input type="email" class="form-control form-control-lg" name="email" id="exampleInputEmail1" placeholder="Email">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputAddress1" placeholder="Address">
+                    <input type="text" class="form-control form-control-lg" name="address1" id="exampleInputAddress1" placeholder="Address">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputMobile1" placeholder="MobileNo">
+                    <input type="text" class="form-control form-control-lg" name="mobile" id="exampleInputMobile1" placeholder="MobileNo">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputAadharNo1" placeholder="Aadhar No">
+                    <input type="text" class="form-control form-control-lg" name="aadharno" id="exampleInputAadharNo1" placeholder="Aadhar No">
                   </div>
                   <div class="form-group">
-                    <select class="form-control form-control-lg" id="exampleFormControlSelect2">
+                    <select class="form-control form-control-lg" name="gender" id="exampleFormControlSelect2">
                       <option>Gender</option>
                       <option>Male</option>
                       <option>Female</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputEducation1" placeholder="Education">
+                    <input type="text" class="form-control form-control-lg" name="education" id="exampleInputEducation1" placeholder="Education">
+                  </div>
+                  <div class="form-group">
+                    <label>Profile Photo</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                      <input type="text" class="form-control form-control-lg file-upload-info" name="pic" disabled placeholder="Upload Image">
+                      <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                      </span>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label>ID Proof</label>
                     <input type="file" name="img[]" class="file-upload-default">
                     <div class="input-group col-xs-12">
-                      <input type="text" class="form-control form-control-lg file-upload-info" disabled placeholder="Upload Image">
+                      <input type="text" class="form-control form-control-lg file-upload-info" name="id_proof" disabled placeholder="Upload Image">
                       <span class="input-group-append">
                         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                       </span>
@@ -73,21 +83,21 @@
                     <label>Address Proof</label>
                     <input type="file" name="img[]" class="file-upload-default">
                     <div class="input-group col-xs-12">
-                      <input type="text" class="form-control form-control-lg file-upload-info" disabled placeholder="Upload Image">
+                      <input type="text" class="form-control form-control-lg file-upload-info" name="address_proof" disabled placeholder="Upload Image">
                       <span class="input-group-append">
                         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                       </span>
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputCity1" placeholder="City">
+                    <input type="text" class="form-control form-control-lg" name="city" id="exampleInputCity1" placeholder="City">
                   </div>
                   <div class="form-group">
-                    <textarea class="form-control form-control-lg" id="exampleTextarea1" rows="4" placeholder="Skills"></textarea>
+                    <textarea class="form-control form-control-lg" name="skills" id="exampleTextarea1" rows="4" placeholder="Skills"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="exampleTextarea1"></label>
-                    <textarea class="form-control form-control-lg" id="exampleTextarea2" rows="4" placeholder="Experience"></textarea>
+                    <textarea class="form-control form-control-lg" name="experience" id="exampleTextarea2" rows="4" placeholder="Experience"></textarea>
                   </div>
                   <div class="mb-4">
                     <div class="form-check">

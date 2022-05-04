@@ -1,27 +1,94 @@
 import os
-import requests
+import random
 from django.urls import reverse
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from job.models import *
 from datetime import datetime,date
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.conf import settings
 from django. contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.hashers import check_password, make_password
 from django.shortcuts import render
+from django.core.mail import send_mail
 
 # Create your views here.
 
 def Login(request):
-        
-       return render(request, 'Login.html')
+
+       User = designation.objects.get(designation="User")
+       Worker = designation.objects.get(designation="Worker")
+       Contractor = designation.objects.get(designation="Contractor")
+       if request.method == 'POST':
+        email  = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(username=email,password=password)
+        if user is not None:
+            request.session['SAdm_id'] = user.id
+            return redirect( 'SuperAdmin_index')
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=User.id,status="Approval" or "approval").exists():
+                
+                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                request.session['Usr_id'] = member.designation_id
+                request.session['usernamets1'] = member.fullname
+                request.session['Usr_id'] = member.id 
+                mem=user_registration.objects.filter(id= member.id)
+                
+                return render(request,'User_index.html',{'mem':mem})
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=Worker.id,status="Approval" or "Approval").exists():
+                
+                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                request.session['Wkr_id'] = member.designation_id
+                request.session['usernamets1'] = member.fullname
+                request.session['Wkr_id'] = member.id 
+                mem1=user_registration.objects.filter(id= member.id)
+                
+                return render(request,'WorkerOrContractor_index.html',{'mem1':mem1})
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=Contractor.id,status="Approval" or "Approval").exists():
+                
+                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                request.session['Cntr_id'] = member.designation_id
+                request.session['usernamets1'] = member.fullname
+                request.session['Cntr_id'] = member.id 
+                mem2=user_registration.objects.filter(id= member.id)
+                
+                return render(request,'WorkerOrContractor_index.html',{'mem2':mem2})        
+        else:
+            context = {'msg_error': 'Invalid data'}
+            return render(request, 'login.html', context)
+       return render(request,'login.html')
+
+
 
 def RegistrationForm(request):
+       if request.method == 'POST':
+        acc = user_registration()
+        acc.fullname = request.POST['username']
+        acc.gender = request.POST['gender']
+        acc.email = request.POST['email']
+        acc.password = request.POST['psswd']
+        acc.mobile = request.POST['mobile']
+        acc.aadharno = request.POST['aadharno']
+        acc.pincode = request.POST['pincode']
+        acc.education = request.POST['education']
+        acc.idproof = request.FILES['id_proof']
+        acc.addressproof = request.FILES['address_proof']
+        acc.photo = request.FILES['pic']
+        acc.city = request.POST['city']
+        acc.country = request.POST['country']
+        acc.address1 = request.POST['address1']
+        acc.skills = request.POST['skills']
+        acc.experience = request.POST['experience']
+        acc.joiningdate = datetime.now()
+        acc.save()
+       return render(request,'RegistrationForm.html')
         
-       return render(request, 'RegistrationForm.html')       
+       
 
 
 
@@ -96,6 +163,11 @@ def SuperAdmin_UserDetails(request):
 def WorkerOrContractor_index(request):
         
        return render(request, 'WorkerOrContractor_index.html')  
+
+
+def WorkerOrContractor_AddWorkDetails(request):
+        
+       return render(request, 'WorkerOrContractor_AddWorkDetails.html') 
 
 
 def WorkerOrContractor_ViewWorkDetails(request):

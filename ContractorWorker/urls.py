@@ -50,6 +50,7 @@ urlpatterns = [
 
 
      re_path(r'^WorkerOrContractor_index$', views.WorkerOrContractor_index, name='WorkerOrContractor_index'),
+     re_path(r'^WorkerOrContractor_AddWorkDetails$', views.WorkerOrContractor_AddWorkDetails, name='WorkerOrContractor_AddWorkDetails'),
      re_path(r'^WorkerOrContractor_ViewWorkDetails$', views.WorkerOrContractor_ViewWorkDetails, name='WorkerOrContractor_ViewWorkDetails'),
      re_path(r'^WorkerOrContractor_UpdateWorkDetails$', views.WorkerOrContractor_UpdateWorkDetails, name='WorkerOrContractor_UpdateWorkDetails'),
      re_path(r'^WorkerOrContractor_ViewFeedbackDetails$', views.WorkerOrContractor_ViewFeedbackDetails, name='WorkerOrContractor_ViewFeedbackDetails'),

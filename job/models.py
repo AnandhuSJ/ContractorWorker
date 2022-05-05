@@ -13,22 +13,9 @@ class designation(models.Model):
 
 
 
-class contractor(models.Model):
-    contracttype = models.CharField(max_length=100)
-    cityandpin = models.CharField(max_length=100)
-    costdayshrs = models.CharField(max_length=100)
-    usertype = models.CharField(max_length=100)
-    contractorfeedback = models.CharField(max_length=240, null=True)
-   
-
-    def __str__(self):
-        return self.contracttype 
-
 class user_registration(models.Model):
     designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
-                                    related_name='userregistrationdesignation', null=True, blank=True)  
-    contractor = models.ForeignKey(contractor, on_delete=models.DO_NOTHING,
-                                    related_name='userregistrationcontractor', null=True, blank=True)                                                               
+                                    related_name='userregistrationdesignation', null=True, blank=True)                                                               
     fullname = models.CharField(max_length=240, null=True)
     dateofbirth = models.DateField(
         auto_now_add=False, auto_now=False,  null=True, blank=True)
@@ -54,18 +41,13 @@ class user_registration(models.Model):
     joiningdate = models.DateField(
         auto_now_add=False, auto_now=False,  null=True, blank=True)
     status = models.CharField(max_length=240, null=True, default='')
-    worktype = models.CharField(max_length=100)
-    cityandpin = models.CharField(max_length=100)
-    costdayshrs = models.CharField(max_length=100)
-    usertype = models.CharField(max_length=100)
+    worktype = models.CharField(max_length=100, null=True, default='')
+    cityandpin = models.CharField(max_length=100, null=True, default='')
+    costdayshrs = models.CharField(max_length=100, null=True, default='')
+    usertype = models.CharField(max_length=100,null=True, default='')
+    contracttype = models.CharField(max_length=100,null=True, default='')
 
     def __str__(self):
         return self.fullname
 
-class worker(models.Model):
-    contractorfeedback = models.ForeignKey(contractor, on_delete=models.DO_NOTHING,null=True, blank=True)
-    userfeedback = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,null=True, blank=True)
-   
-
-    def __str__(self):
-        return self.worktype        
+    

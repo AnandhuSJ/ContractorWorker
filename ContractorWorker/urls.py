@@ -27,6 +27,7 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
      re_path(r'^$', views.Login, name='Login'),
      re_path(r'^RegistrationForm$', views.RegistrationForm, name='RegistrationForm'),
+     re_path(r'^RegistrationFormUser$', views.RegistrationFormUser, name='RegistrationFormUser'),
    
 
    ######## User Module ########
@@ -37,8 +38,14 @@ urlpatterns = [
      re_path(r'^User_ViewWorkDetails$', views.User_ViewWorkDetails, name='User_ViewWorkDetails'),
      re_path(r'^User_WorkerDetails_table$', views.User_WorkerDetails_table, name='User_WorkerDetails_table'),
      re_path(r'^User_ContractorDetails_table$', views.User_ContractorDetails_table, name='User_ContractorDetails_table'),
+     re_path(r'^User_Accsetting/$',views.User_Accsetting,name='User_Accsetting'),
+     re_path(r'^User_Profile_Imagechange/(?P<id>\d+)/$',views.User_Profile_Imagechange,name='User_Profile_Imagechange'),
+     re_path(r'^User_Changepwd/(?P<id>\d+)/$',views.User_Changepwd,name='User_Changepwd'),
+     re_path(r'^User_logout/$',views.User_logout,name='User_logout'),
 
 
+    re_path(r'^SuperAdmin_logout/$', views.SuperAdmin_logout, name='SuperAdmin_logout'),
+    re_path(r'^SuperAdmin_Accountsett/$',views.SuperAdmin_Accountsett,name='SuperAdmin_Accountsett'),
      re_path(r'^SuperAdmin_index$', views.SuperAdmin_index, name='SuperAdmin_index'),
      re_path(r'^SuperAdmin_WorkerWorkDetails_cards$', views.SuperAdmin_WorkerWorkDetails_cards, name='SuperAdmin_WorkerWorkDetails_cards'),
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_table$', views.SuperAdmin_ActiveWorkerWorkDetails_table, name='SuperAdmin_ActiveWorkerWorkDetails_table'),
@@ -48,13 +55,28 @@ urlpatterns = [
      re_path(r'^SuperAdmin_PreviousContractorWorkDetails_table$', views.SuperAdmin_PreviousContractorWorkDetails_table, name='SuperAdmin_PreviousContractorWorkDetails_table'),
      re_path(r'^SuperAdmin_UserDetails$', views.SuperAdmin_UserDetails, name='SuperAdmin_UserDetails'),
 
-
-     re_path(r'^WorkerOrContractor_index$', views.WorkerOrContractor_index, name='WorkerOrContractor_index'),
-     re_path(r'^WorkerOrContractor_AddWorkDetails$', views.WorkerOrContractor_AddWorkDetails, name='WorkerOrContractor_AddWorkDetails'),
-     re_path(r'^WorkerOrContractor_ViewWorkDetails$', views.WorkerOrContractor_ViewWorkDetails, name='WorkerOrContractor_ViewWorkDetails'),
-     re_path(r'^WorkerOrContractor_UpdateWorkDetails$', views.WorkerOrContractor_UpdateWorkDetails, name='WorkerOrContractor_UpdateWorkDetails'),
-     re_path(r'^WorkerOrContractor_ViewFeedbackDetails$', views.WorkerOrContractor_ViewFeedbackDetails, name='WorkerOrContractor_ViewFeedbackDetails'),
-     re_path(r'^WorkerOrContractor_MyProfile$', views.WorkerOrContractor_MyProfile, name='WorkerOrContractor_MyProfile'),
+     
+     re_path(r'^Worker_index$', views.Worker_index, name='Worker_index'),
+     re_path(r'^Worker_AddWorkDetails$', views.Worker_AddWorkDetails, name='Worker_AddWorkDetails'),
+     re_path(r'^Worker_ViewWorkDetails$', views.Worker_ViewWorkDetails, name='Worker_ViewWorkDetails'),
+     re_path(r'^Worker_UpdateWorkDetails$', views.Worker_UpdateWorkDetails, name='Worker_UpdateWorkDetails'),
+     re_path(r'^Worker_ViewFeedbackDetails$', views.Worker_ViewFeedbackDetails, name='Worker_ViewFeedbackDetails'),
+     re_path(r'^Worker_MyProfile$', views.Worker_MyProfile, name='Worker_MyProfile'),
+     re_path(r'^Worker_Accsetting/$',views.Worker_Accsetting,name='Worker_Accsetting'),
+     re_path(r'^Worker_logout/$', views.Worker_logout, name='Worker_logout'),
+     re_path(r'^Worker_Profile_Imagechange/(?P<id>\d+)/$',views.Worker_Profile_Imagechange,name='Worker_Profile_Imagechange'),
+     re_path(r'^Worker_Changepwd/(?P<id>\d+)/$',views.Worker_Changepwd,name='Worker_Changepwd'),
+    
+     re_path(r'^Contractor_index$', views.Contractor_index, name='Contractor_index'),
+     re_path(r'^Contractor_AddWorkDetails$', views.Contractor_AddWorkDetails, name='Contractor_AddWorkDetails'),
+     re_path(r'^Contractor_ViewWorkDetails$', views.Contractor_ViewWorkDetails, name='Contractor_ViewWorkDetails'),
+     re_path(r'^Contractor_UpdateWorkDetails$', views.Contractor_UpdateWorkDetails, name='Contractor_UpdateWorkDetails'),
+     re_path(r'^Contractor_PostFeedbackDetails$', views.Contractor_PostFeedbackDetails, name='Contractor_PostFeedbackDetails'),
+     re_path(r'^Contractor_MyProfile$', views.Contractor_MyProfile, name='Contractor_MyProfile'),
+     re_path(r'^Contractor_Accsetting/$',views.Contractor_Accsetting,name='Contractor_Accsetting'),
+     re_path(r'^Contractor_logout/$', views.Contractor_logout, name='Contractor_logout'),
+     re_path(r'^Contractor_Profile_Imagechange/(?P<id>\d+)/$',views.Contractor_Profile_Imagechange,name='Contractor_Profile_Imagechange'),
+     re_path(r'^Contractor_Changepwd/(?P<id>\d+)/$',views.Contractor_Changepwd,name='Contractor_Changepwd'),
     
     
 

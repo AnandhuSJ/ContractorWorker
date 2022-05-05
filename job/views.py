@@ -47,7 +47,7 @@ def Login(request):
                 request.session['Wkr_id'] = member.id 
                 mem1=user_registration.objects.filter(id= member.id)
                 
-                return render(request,'WorkerOrContractor_index.html',{'mem1':mem1})
+                return render(request,'Worker_index.html',{'mem1':mem1})
 
         elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=Contractor.id,status="Approval" or "Approval").exists():
                 
@@ -57,7 +57,7 @@ def Login(request):
                 request.session['Cntr_id'] = member.id 
                 mem2=user_registration.objects.filter(id= member.id)
                 
-                return render(request,'WorkerOrContractor_index.html',{'mem2':mem2})        
+                return render(request,'Contractor_index.html',{'mem2':mem2})        
         else:
             context = {'msg_error': 'Invalid data'}
             return render(request, 'login.html', context)
@@ -66,7 +66,7 @@ def Login(request):
 
 
 def RegistrationForm(request):
-       if request.method == 'POST':
+     if request.method == 'POST':
         acc = user_registration()
         acc.fullname = request.POST['username']
         acc.gender = request.POST['gender']
@@ -84,25 +84,220 @@ def RegistrationForm(request):
         acc.address1 = request.POST['address1']
         acc.skills = request.POST['skills']
         acc.experience = request.POST['experience']
-        acc.joiningdate = datetime.now()
         acc.save()
-       return render(request,'RegistrationForm.html')
+        msg_success = "Registration successfully Check Your Registered Mail"
+        return render(request,'RegistrationForm.html',{'msg_success': msg_success})
+     return render(request,'RegistrationForm.html')
+
+
+def RegistrationFormUser(request):
+      if request.method == 'POST':
+        acc = user_registration()
+        acc.fullname = request.POST['username']
+        acc.email = request.POST['email']
+        acc.password = request.POST['psswd']
+        acc.mobile = request.POST['mobile']
+        acc.aadharno = request.POST['aadharno']
+        acc.photo = request.FILES['pic']
+        acc.save()
+        msg_success = "Registration successfully"
+        return render(request,'RegistrationFormUser.html',{'msg_success': msg_success}) 
+      return render(request,'RegistrationForm.html')      
         
        
+def SuperAdmin_Accountsett(request):
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        users = User.objects.filter(id=SAdm_id)
+        if request.method == 'POST':
 
+            newPassword = request.POST.get('newPassword')
+            confirmPassword = request.POST.get('confirmPassword')
+
+            user = User.objects.get(is_superuser=True)
+            if newPassword == confirmPassword:
+                user.set_password(newPassword)
+                user.save()
+                msg_success = "Password has been changed successfully"
+                return render(request, 'SuperAdmin_Accountsett.html', {'msg_success': msg_success})
+            else:
+                msg_error = "Password does not match"
+                return render(request, 'SuperAdmin_Accountsett.html', {'msg_error': msg_error})
+        return render(request, 'SuperAdmin_Accountsett.html', {'users': users})
+    else:
+        return redirect('/')
+
+def SuperAdmin_logout(request):
+    request.session.flush()
+    return redirect("/")
+
+
+
+
+
+def SuperAdmin_index(request):
+    if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+         users = User.objects.filter(id=SAdm_id)
+        
+         return render(request, 'SuperAdmin_index.html',{'users':users}) 
+    else:
+        return redirect('/')
+
+def SuperAdmin_WorkerWorkDetails_cards(request):
+     if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+         users = User.objects.filter(id=SAdm_id)
+        
+         return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html')
+     else:
+        return redirect('/')
+
+def SuperAdmin_ActiveWorkerWorkDetails_table(request):
+     if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+         users = User.objects.filter(id=SAdm_id)
+         des = designation.objects.get(designation='Worker')
+         Worker = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all().order_by('-id')
+         return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html',{'users':users,'Worker':Worker}) 
+     else:
+        return redirect('/')
+        
+def SuperAdmin_PreviousWorkerWorkDetails_table(request):
+       if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        users = User.objects.filter(id=SAdm_id)
+        
+       return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html')              
+
+
+def SuperAdmin_ContractorWorkDetails_cards(request):
+       if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        users = User.objects.filter(id=SAdm_id)
+        
+       return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html')     
+
+
+def SuperAdmin_ActiveContractorWorkDetails_table(request):
+       if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        users = User.objects.filter(id=SAdm_id)
+        
+       return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html')  
+
+
+def SuperAdmin_PreviousContractorWorkDetails_table(request):
+       if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        users = User.objects.filter(id=SAdm_id)
+        
+       return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html')
+
+def SuperAdmin_UserDetails(request):
+       if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        users = User.objects.filter(id=SAdm_id)
+        
+       return render(request, 'SuperAdmin_UserDetails.html')       
+
+
+
+def User_Accsetting(request):
+    if 'Usr_id' in request.session:
+        if request.session.has_key('Usr_id'):
+            Usr_id = request.session['Usr_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Usr_id)
+       
+        if request.method == 'POST':
+               acc = user_registration()
+               acc.fullname = request.POST['username']
+               acc.email = request.POST['email']
+               acc.password = request.POST['psswd']
+               acc.mobile = request.POST['mobile']
+               acc.aadharno = request.POST['aadharno']
+               acc.photo = request.FILES['pic']
+               acc.save()
+               msg_success = "Accounts changed successfully"
+               return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
+        return render(request,'User_Accsetting.html',{'mem':mem})
+    else:
+        return redirect('/')
+        
+
+
+def User_Profile_Imagechange(request,id):
+    if request.method == 'POST':
+        ab = user_registration.objects.get(id=id)
+        ab.photo = request.FILES['files']
+        ab.save()
+        msg_success = "Profile Picture changed successfully"
+        return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
+
+def User_Changepwd(request,id):
+    if request.method == 'POST':
+        ac = user_registration.objects.get(id=id)
+        oldps = request.POST['currentPassword']
+        newps = request.POST['newPassword']
+        cmps = request.POST.get('confirmPassword')
+        if oldps != newps:
+            if newps == cmps:
+                ac.password = request.POST.get('confirmPassword')
+                ac.save()
+                msg_success = "Password changed successfully"
+                return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
+
+        elif oldps == newps:
+            messages.add_message(request, messages.INFO, 'Current and New password same')
+        else:
+            messages.info(request, 'Incorrect password same')
+
+        return redirect('User_Accsetting')
+
+def User_logout(request):
+    if 'Usr_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
+            
 
 
 def User_index(request):
+       if 'Usr_id' in request.session:
+        if request.session.has_key('Usr_id'):
+            Usr_id = request.session['Usr_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Usr_id)
         
-       return render(request, 'User_index.html')
+        return render(request, 'User_index.html',{'mem':mem})
 
 def User_MyProfile(request):
         
        return render(request, 'User_MyProfile.html')
 
 def User_MyRegister(request):
+       if 'Usr_id' in request.session:
+        if request.session.has_key('Usr_id'):
+            Usr_id = request.session['Usr_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Usr_id)
+        myregister = user_registration.objects.all()
         
-       return render(request, 'User_MyRegister.html')
+       return render(request, 'User_MyRegister.html',{'mem':mem,'myregister':myregister})
 
 def User_PostFeedback(request):
         
@@ -122,75 +317,195 @@ def User_ContractorDetails_table(request):
 
 
 
-def SuperAdmin_index(request):
+
+
+def Worker_Accsetting(request):
+    if 'Wkr_id' in request.session:
+        if request.session.has_key('Wkr_id'):
+            Wkr_id = request.session['Wkr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=Wkr_id)
+        if request.method == 'POST':
+            acc = user_registration()
+            acc.fullname = request.POST['username']
+            acc.gender = request.POST['gender']
+            acc.email = request.POST['email']
+            acc.password = request.POST['psswd']
+            acc.mobile = request.POST['mobile']
+            acc.aadharno = request.POST['aadharno']
+            acc.pincode = request.POST['pincode']
+            acc.education = request.POST['education']
+            acc.idproof = request.FILES['id_proof']
+            acc.addressproof = request.FILES['address_proof']
+            acc.photo = request.FILES['pic']
+            acc.city = request.POST['city']
+            acc.country = request.POST['country']
+            acc.address1 = request.POST['address1']
+            acc.skills = request.POST['skills']
+            acc.experience = request.POST['experience']
+            acc.save()
+            msg_success = "Accounts changed successfully"
+            return render(request, 'Worker_Accsetting.html', {'msg_success': msg_success})
+        return render(request,'Worker_Accsetting.html',{'mem1':mem1})
+    else:
+        return redirect('/')
+
+def Worker_Profile_Imagechange(request,id):
+    if request.method == 'POST':
+        ab = user_registration.objects.get(id=id)
+        ab.photo = request.FILES['files']
+        ab.save()
+        msg_success = "Profile Picture changed successfully"
+        return render(request, 'Worker_Accsetting.html', {'msg_success': msg_success})
+
+def Worker_Changepwd(request,id):
+    if request.method == 'POST':
+        ac = user_registration.objects.get(id=id)
+        oldps = request.POST['currentPassword']
+        newps = request.POST['newPassword']
+        cmps = request.POST.get('confirmPassword')
+        if oldps != newps:
+            if newps == cmps:
+                ac.password = request.POST.get('confirmPassword')
+                ac.save()
+                msg_success = "Password changed successfully"
+                return render(request, 'Worker_Accsetting.html', {'msg_success': msg_success})
+        elif oldps == newps:
+            messages.add_message(request, messages.INFO, 'Current and New password same')
+        else:
+            messages.info(request, 'Incorrect password same')
+
+        return redirect('Worker_Accsetting')
+    
+def Worker_logout(request):
+    if 'Wkr_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
+
+def Worker_index(request):
         
-       return render(request, 'SuperAdmin_index.html')
+       return render(request, 'Worker_index.html')  
 
-def SuperAdmin_WorkerWorkDetails_cards(request):
+
+def Worker_AddWorkDetails(request):
         
-       return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html')
+       return render(request, 'Worker_AddWorkDetails.html') 
 
-def SuperAdmin_ActiveWorkerWorkDetails_table(request):
+
+def Worker_ViewWorkDetails(request):
         
-       return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html') 
+       return render(request, 'Worker_ViewWorkDetails.html') 
 
-def SuperAdmin_PreviousWorkerWorkDetails_table(request):
+def Worker_UpdateWorkDetails(request):
         
-       return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html')              
+       return render(request, 'Worker_UpdateWorkDetails.html')             
 
 
-def SuperAdmin_ContractorWorkDetails_cards(request):
+def Worker_ViewFeedbackDetails(request):
         
-       return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html')     
+       return render(request, 'Worker_ViewFeedbackDetails.html')     
 
 
-def SuperAdmin_ActiveContractorWorkDetails_table(request):
+def Worker_MyProfile(request):
         
-       return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html')  
+       return render(request, 'Worker_MyProfile.html')     
 
 
-def SuperAdmin_PreviousContractorWorkDetails_table(request):
+def Contractor_Accsetting(request):
+    if 'Cntr_id' in request.session:
+        if request.session.has_key('Cntr_id'):
+            Cntr_id = request.session['Cntr_id']
+        else:
+            return redirect('/')
+        mem2 = user_registration.objects.filter(id=Cntr_id)
+        if request.method == 'POST':
+            acc = user_registration()
+            acc.fullname = request.POST['username']
+            acc.gender = request.POST['gender']
+            acc.email = request.POST['email']
+            acc.password = request.POST['psswd']
+            acc.mobile = request.POST['mobile']
+            acc.aadharno = request.POST['aadharno']
+            acc.pincode = request.POST['pincode']
+            acc.education = request.POST['education']
+            acc.idproof = request.FILES['id_proof']
+            acc.addressproof = request.FILES['address_proof']
+            acc.photo = request.FILES['pic']
+            acc.city = request.POST['city']
+            acc.country = request.POST['country']
+            acc.address1 = request.POST['address1']
+            acc.skills = request.POST['skills']
+            acc.experience = request.POST['experience']
+            acc.save()
+            msg_success = "Accounts changed successfully"
+            return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
+        return render(request,'Contractor_Accsetting.html',{'mem2':mem2})
+    else:
+        return redirect('/')
+
+def Contractor_Profile_Imagechange(request,id):
+    if request.method == 'POST':
+        ab = user_registration.objects.get(id=id)
+        ab.photo = request.FILES['files']
+        ab.save()
+        msg_success = "Profile Picture changed successfully"
+        return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
+
+def Contractor_Changepwd(request,id):
+    if request.method == 'POST':
+        ac = user_registration.objects.get(id=id)
+        oldps = request.POST['currentPassword']
+        newps = request.POST['newPassword']
+        cmps = request.POST.get('confirmPassword')
+        if oldps != newps:
+            if newps == cmps:
+                ac.password = request.POST.get('confirmPassword')
+                ac.save()
+                msg_success = "Password changed successfully"
+                return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
+        elif oldps == newps:
+            messages.add_message(request, messages.INFO, 'Current and New password same')
+        else:
+            messages.info(request, 'Incorrect password same')
+
+        return redirect('Contractor_Accsetting')
+    
+def Contractor_logout(request):
+    if 'Cntr_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
+
+
+def Contractor_index(request):
         
-       return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html')
+       return render(request, 'Contractor_index.html') 
 
-def SuperAdmin_UserDetails(request):
+
+def Contractor_AddWorkDetails(request):
         
-       return render(request, 'SuperAdmin_UserDetails.html')       
+       return render(request, 'Contractor_AddWorkDetails.html') 
 
 
-
-
-def WorkerOrContractor_index(request):
+def Contractor_ViewWorkDetails(request):
         
-       return render(request, 'WorkerOrContractor_index.html')  
+       return render(request, 'Contractor_ViewWorkDetails.html') 
 
-
-def WorkerOrContractor_AddWorkDetails(request):
+def Contractor_UpdateWorkDetails(request):
         
-       return render(request, 'WorkerOrContractor_AddWorkDetails.html') 
+       return render(request, 'Contractor_UpdateWorkDetails.html')             
 
 
-def WorkerOrContractor_ViewWorkDetails(request):
+def Contractor_PostFeedbackDetails(request):
         
-       return render(request, 'WorkerOrContractor_ViewWorkDetails.html') 
+       return render(request, 'Contractor_PostFeedbackDetails.html')     
 
-def WorkerOrContractor_UpdateWorkDetails(request):
+
+def Contractor_MyProfile(request):
         
-       return render(request, 'WorkerOrContractor_UpdateWorkDetails.html')             
-
-
-def WorkerOrContractor_ViewFeedbackDetails(request):
-        
-       return render(request, 'WorkerOrContractor_ViewFeedbackDetails.html')     
-
-
-def WorkerOrContractor_MyProfile(request):
-        
-       return render(request, 'WorkerOrContractor_MyProfile.html')         
-
-
-
-
-
-
+       return render(request, 'Contractor_MyProfile.html')    
 

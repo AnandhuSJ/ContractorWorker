@@ -27,21 +27,22 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class=" navbar-brand-wrapper ">
-            <a class=" " href="index.html"></a><h3 class="n pt-3 pl-4">&nbsp;&nbsp;<b><i>Contractor&Worker</i></b></h3>
-            <a class="navbar-brand brand-logo" href="index.html"></a>
+            <a class=" " href="Worker_index.html"></a><h3 class="n pt-3 pl-4">&nbsp;&nbsp;<b><i>Contractor&Worker</i></b></h3>
+            <a class="navbar-brand brand-logo" href="Worker_index.html"></a>
         </div> 
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           
           
           <ul class="navbar-nav navbar-nav-right">
-            
+           
+           
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
                   <img src="{% static 'assets/images/faces/face27.jpg' %}" alt="image">
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">Henry Klein</p>
+                  <p class="mb-1 text-black"> {% for i in mem1 %}Henry Klein {% endfor %}</p>
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
@@ -56,13 +57,13 @@
                       <i class="mdi mdi-account-outline ms-1"></i>
                     </span>
                   </a>
-                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{% url 'Worker_Accsetting' %}">
                     <span>Settings</span>
                     <i class="mdi mdi-settings"></i>
                   </a>
                   <div role="separator" class="dropdown-divider"></div>
                   <h5 class="dropdown-header text-uppercase  ps-2 text-dark mt-2">Actions</h5>
-                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{% url 'Worker_logout' %}">
                     <span>Log Out</span>
                     <i class="mdi mdi-logout ms-1"></i>
                   </a>
@@ -75,31 +76,32 @@
           </button>
         </div>
       </nav>
+     
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'WorkerOrContractor_AddWorkDetails' %}">
+              <a class="nav-link" href="{% url 'Worker_AddWorkDetails' %}">
                 <span class="icon-bg"><i class="mdi mdi-account-box-outline menu-icon"></i></span>
                 <span class="menu-title">Add Work Details</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'WorkerOrContractor_ViewWorkDetails' %}">
+              <a class="nav-link" href="{% url 'Worker_ViewWorkDetails' %}">
                 <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
                 <span class="menu-title">View Work Details</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'WorkerOrContractor_ViewFeedbackDetails' %}">
+              <a class="nav-link" href="{% url 'Worker_ViewFeedbackDetails' %}">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">View Feedback Details</span>
               </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'WorkerOrContractor_MyProfile' %}">
+                <a class="nav-link" href="{% url 'Worker_MyProfile' %}">
                   <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                   <span class="menu-title">My Profile</span>
                 </a>

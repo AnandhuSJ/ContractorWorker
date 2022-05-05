@@ -28,19 +28,25 @@
           </tr>
         </thead>
         <tbody>
+          {% for i in Worker %}
           <tr>
-            <td>01</td>
-            <td>Jacob</td>
-            <td>Painter</td>
-            <td>Furniture Making</td>
-            <td>8 years</td>
-            <td>2nd Cross</td>
-            <td>Vallam</td>
-            <td>thanjavur-623431</td>
-            <td>4565464566</td>
-            <td>2500</td>
-            <td>Worker</td>
-            <td>Approval</td>
+            <form method="post" action="" enctype="multipart/form-data">
+              {%csrf_token%}
+            <td>{{forloop.counter}}</td>
+            <td>
+              <img src="{{ i.photo.url }}" alt="image" />
+              <span class="ps-2">{{ i.fullname }}</span>
+          </td>
+            <td>{{ i.worktype }}</td>
+            <td>{{ i.skills }}</td>
+            <td>{{ i.experience }}</td>
+            <td>{{ i.address1 }}</td>
+            <td>{{ i.address2 }}</td>
+            <td>{{ i.cityandpin }}</td>
+            <td>{{ i.aadharno }}</td>
+            <td>{{ i.costdayshrs }}</td>
+            <td>{{ i.usertype }}</td>
+            <td>{{ i.status }}</td>
             <td>
               <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required>
                 <option style="display: none" value=""></option>
@@ -57,35 +63,7 @@
                 <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
             </td>
           </tr>
-          <tr>
-            <td>02</td>
-            <td>Messsy</td>
-            <td>Carpenter</td>
-            <td>Mathematical Calculation</td>
-            <td>6 years</td>
-            <td>2nd Cross</td>
-            <td>Vallam</td>
-            <td>thanjavur-623431</td>
-            <td>56576535325</td>
-            <td>2200</td>
-            <td>Worker</td>
-            <td>Approval</td>
-            <td>
-              <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required>
-                <option style="display: none" value=""></option>
-
-
-                <option value="Active">Pending</option>
-                <option value="Resign">Approval</option>
-                <option value="Resign">Reject</option>
-
-              </select>
-            </td>
-            <td>
-              <button type="submit" class="btn btn-outline-primary btn-icon-text">
-                <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
-            </td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
       </div>

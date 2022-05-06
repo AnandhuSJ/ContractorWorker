@@ -16,24 +16,21 @@
               <th>Work</th>
               <th>Work Type</th>
               <th>Skills</th>
-             
             </tr>
           </thead>
           <tbody>
+            {% for i in workerdetails %}
             <tr>
-              <td>01</td>
-              <td>Jacob</td>
-              <td>Painter</td>
-              <td>Worker</td>
-              <td>Furniture Making</td>
+              <td>{{forloop.counter}}</td>
+              <td>
+                <img src="{{ i.photo.url }}" alt="image" />
+                <span class="ps-2">{{ i.fullname }}</span>
+            </td>
+            <td></td>
+            <td>{{ i.worktype }}</td>
+            <td>{{ i.skills }}</td>
             </tr>
-            <tr>
-              <td>02</td>
-              <td>Messsy</td>
-              <td>Carpenter</td>
-              <td>Worker</td>
-              <td>Mathematical Calculation</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         </div>

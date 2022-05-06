@@ -11,31 +11,27 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Worker ID</th>
-              <th>Worker Name</th>
+              <th>Contractor ID</th>
+              <th>Contractor Name</th>
               <th>Work</th>
-              <th>Work Type</th>
+              <th>Contractor Type</th>
               <th>Skills</th>
              
             </tr>
           </thead>
           <tbody>
+            {% for i in contractordetails %}
             <tr>
-              <td>01</td>
-              <td>Jacob</td>
-              <td>Painter</td>
-              <td>Worker</td>
-              <td>Furniture Making</td>
-              
+              <td>{{forloop.counter}}</td>
+            <td>
+              <img src="{{ i.photo.url }}" alt="image" />
+              <span class="ps-2">{{ i.fullname }}</span>
+          </td>
+          <td></td>
+          <td>{{ i.contracttype }}</td>
+          <td>{{ i.skills }}</td>
             </tr>
-            <tr>
-              <td>02</td>
-              <td>Messsy</td>
-              <td>Carpenter</td>
-              <td>Worker</td>
-              <td>Mathematical Calculation</td>
-              
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         </div>

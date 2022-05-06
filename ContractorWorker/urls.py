@@ -35,7 +35,7 @@ urlpatterns = [
      re_path(r'^User_MyProfile$', views.User_MyProfile, name='User_MyProfile'),
      re_path(r'^User_MyRegister$', views.User_MyRegister, name='User_MyRegister'),
      re_path(r'^User_PostFeedback$', views.User_PostFeedback, name='User_PostFeedback'),
-     re_path(r'^User_ViewWorkDetails$', views.User_ViewWorkDetails, name='User_ViewWorkDetails'),
+     re_path(r'^User_ViewWorkDetails_card$', views.User_ViewWorkDetails_card, name='User_ViewWorkDetails_card'),
      re_path(r'^User_WorkerDetails_table$', views.User_WorkerDetails_table, name='User_WorkerDetails_table'),
      re_path(r'^User_ContractorDetails_table$', views.User_ContractorDetails_table, name='User_ContractorDetails_table'),
      re_path(r'^User_Accsetting/$',views.User_Accsetting,name='User_Accsetting'),
@@ -44,8 +44,8 @@ urlpatterns = [
      re_path(r'^User_logout/$',views.User_logout,name='User_logout'),
 
 
-    re_path(r'^SuperAdmin_logout/$', views.SuperAdmin_logout, name='SuperAdmin_logout'),
-    re_path(r'^SuperAdmin_Accountsett/$',views.SuperAdmin_Accountsett,name='SuperAdmin_Accountsett'),
+     re_path(r'^SuperAdmin_logout/$', views.SuperAdmin_logout, name='SuperAdmin_logout'),
+     re_path(r'^SuperAdmin_Accountsett/$',views.SuperAdmin_Accountsett,name='SuperAdmin_Accountsett'),
      re_path(r'^SuperAdmin_index$', views.SuperAdmin_index, name='SuperAdmin_index'),
      re_path(r'^SuperAdmin_WorkerWorkDetails_cards$', views.SuperAdmin_WorkerWorkDetails_cards, name='SuperAdmin_WorkerWorkDetails_cards'),
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_table$', views.SuperAdmin_ActiveWorkerWorkDetails_table, name='SuperAdmin_ActiveWorkerWorkDetails_table'),
@@ -82,8 +82,5 @@ urlpatterns = [
 
     
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

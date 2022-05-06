@@ -102,7 +102,7 @@ def RegistrationFormUser(request):
         acc.save()
         msg_success = "Registration successfully"
         return render(request,'RegistrationFormUser.html',{'msg_success': msg_success}) 
-      return render(request,'RegistrationForm.html')      
+      return render(request,'RegistrationFormUser.html')      
         
        
 def SuperAdmin_Accountsett(request):
@@ -152,7 +152,7 @@ def SuperAdmin_WorkerWorkDetails_cards(request):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
         
-         return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html')
+         return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html',{'users':users})
      else:
         return redirect('/')
 
@@ -162,53 +162,63 @@ def SuperAdmin_ActiveWorkerWorkDetails_table(request):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
          des = designation.objects.get(designation='Worker')
-         Worker = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all().order_by('-id')
-         return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html',{'users':users,'Worker':Worker}) 
+         AWorker = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all().order_by('-id')
+         return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html',{'users':users,'AWorker':AWorker,'des':des}) 
      else:
         return redirect('/')
         
 def SuperAdmin_PreviousWorkerWorkDetails_table(request):
-       if 'SAdm_id' in request.session:
-        if request.session.has_key('SAdm_id'):
+     if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
-        users = User.objects.filter(id=SAdm_id)
-        
-       return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html')              
-
+         users = User.objects.filter(id=SAdm_id)
+         des = designation.objects.get(designation='Worker')
+         PWorker = user_registration.objects.filter(designation_id = des).filter(status='rejected' or 'Rejected').all().order_by('-id')
+         return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html',{'users':users,'PWorker':PWorker,'des':des})              
+     else:
+        return redirect('/')
 
 def SuperAdmin_ContractorWorkDetails_cards(request):
-       if 'SAdm_id' in request.session:
-        if request.session.has_key('SAdm_id'):
+      if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
-        users = User.objects.filter(id=SAdm_id)
+         users = User.objects.filter(id=SAdm_id)
         
-       return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html')     
+         return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html',{'users':users})     
+      else:
+        return redirect('/')
 
 
 def SuperAdmin_ActiveContractorWorkDetails_table(request):
-       if 'SAdm_id' in request.session:
-        if request.session.has_key('SAdm_id'):
+      if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
-        users = User.objects.filter(id=SAdm_id)
-        
-       return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html')  
-
+         users = User.objects.filter(id=SAdm_id)
+         des = designation.objects.get(designation='Contractor')
+         AContractor = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all().order_by('-id')
+         return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html',{'users':users,'AContractor':AContractor,'des':des})  
+      else:
+        return redirect('/')
 
 def SuperAdmin_PreviousContractorWorkDetails_table(request):
-       if 'SAdm_id' in request.session:
-        if request.session.has_key('SAdm_id'):
+      if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
-        users = User.objects.filter(id=SAdm_id)
-        
-       return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html')
+         users = User.objects.filter(id=SAdm_id)
+         des = designation.objects.get(designation='Worker')
+         PContractor = user_registration.objects.filter(designation_id = des).filter(status='rejected' or 'Rejected').all().order_by('-id')
+         return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html',{'users':users,'PContractor':PContractor,'des':des})
+      else:
+        return redirect('/')
 
 def SuperAdmin_UserDetails(request):
        if 'SAdm_id' in request.session:
         if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
         users = User.objects.filter(id=SAdm_id)
-        
-       return render(request, 'SuperAdmin_UserDetails.html')       
+        des = designation.objects.get(designation='User')
+        Userdetails = user_registration.objects.filter(designation_id = des).all().order_by('-id')
+       return render(request, 'SuperAdmin_UserDetails.html',{'users':users,'Userdetails':Userdetails,'des':des})       
 
 
 
@@ -275,45 +285,77 @@ def User_logout(request):
 
 
 def User_index(request):
-       if 'Usr_id' in request.session:
-        if request.session.has_key('Usr_id'):
+     if 'Usr_id' in request.session:
+         if request.session.has_key('Usr_id'):
             Usr_id = request.session['Usr_id']
-        else:
+         else:
             return redirect('/')
-        mem = user_registration.objects.filter(id=Usr_id)
+         mem = user_registration.objects.filter(id=Usr_id)
         
-        return render(request, 'User_index.html',{'mem':mem})
-
+         return render(request, 'User_index.html',{'mem':mem})
+     else:
+        return redirect('/')
+            
 def User_MyProfile(request):
-        
-       return render(request, 'User_MyProfile.html')
-
+      if 'Usr_id' in request.session:
+          if request.session.has_key('Usr_id'):
+            Usr_id = request.session['Usr_id']
+          else:
+            return redirect('/')
+          mem = user_registration.objects.filter(id=Usr_id)
+          des = designation.objects.get(designation='User')
+          Userprofile = user_registration.objects.filter(designation_id = des).all()
+          return render(request, 'User_MyProfile.html',{'mem':mem,'Userprofile':Userprofile,'des':des})
+      else:
+        return redirect('/')
+            
 def User_MyRegister(request):
-       if 'Usr_id' in request.session:
+     if 'Usr_id' in request.session:
         if request.session.has_key('Usr_id'):
             Usr_id = request.session['Usr_id']
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Usr_id)
-        myregister = user_registration.objects.all()
-        
-       return render(request, 'User_MyRegister.html',{'mem':mem,'myregister':myregister})
-
+        des = designation.objects.get(designation='User')
+        myregister = user_registration.objects.filter(designation_id = des).all()
+        return render(request, 'User_MyRegister.html',{'mem':mem,'myregister':myregister,'des':des})
+     else:
+        return redirect('/')
 def User_PostFeedback(request):
         
        return render(request, 'User_PostFeedback.html')       
 
-def User_ViewWorkDetails(request):
+def User_ViewWorkDetails_card(request):
         
-       return render(request, 'User_ViewWorkDetails.html')
+       return render(request, 'User_ViewWorkDetails_card.html')
 
 def User_WorkerDetails_table(request):
+     if 'Usr_id' in request.session:
+         if request.session.has_key('Usr_id'):
+            Usr_id = request.session['Usr_id']
+         else:
+            return redirect('/')
+         mem = user_registration.objects.filter(id=Usr_id)
+         des = designation.objects.get(designation='Worker')
+         workerdetails = user_registration.objects.filter(designation_id = des).all()
+         return render(request, 'User_WorkerDetails_table.html',{'mem':mem,'workerdetails':workerdetails,'des':des})
+     else:
+        return redirect('/')
         
-       return render(request, 'User_WorkerDetails_table.html')
-
-def User_ContractorDetails_table(request):
+      
+def User_ContractorDetails_table(request):   
+     if 'Usr_id' in request.session:
+         if request.session.has_key('Usr_id'):
+            Usr_id = request.session['Usr_id']
+         else:
+            return redirect('/')
+         mem = user_registration.objects.filter(id=Usr_id)
+         des = designation.objects.get(designation='Contractor')
+         contractordetails = user_registration.objects.filter(designation_id = des).all()
+         return render(request, 'User_ContractorDetails_table.html',{'mem':mem,'contractordetails':contractordetails,'des':des})
+     else:
+        return redirect('/')
         
-       return render(request, 'User_ContractorDetails_table.html')
 
 
 

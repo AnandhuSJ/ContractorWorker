@@ -10,7 +10,7 @@
 
 
 
-
+{% for user in Userprofile %}
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-9 grid-margin">
     <div class="card mt-3 mb-5">
@@ -31,7 +31,7 @@
               <div class="form-group row">
                 <label class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">ID:</label>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">01</p>
+                  <p class="mt-2 text-dark font-weight-normal">{{ user.id }}</p>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
                 <label class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">Full
                   Name:</label>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">Anandhu Shaji</p>
+                  <p class="mt-2 text-dark font-weight-normal">{{ user.fullname }}</p>
                 </div>
               </div>
             </div>
@@ -52,7 +52,7 @@
                 <label
                   class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">Email:</label>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">anandhusj048@gmail.com</p>
+                  <p class="mt-2 text-dark font-weight-normal">{{ user.email }}</p>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
                 <label
                   class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">Password:</label>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">anandhu123</p>
+                  <p class="mt-2 text-dark font-weight-normal">{{ user.password }}</p>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@
                 <label
                   class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">Mobile:</label>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">8797868585</p>
+                  <p class="mt-2 text-dark font-weight-normal">{{ user.mobile }}</p>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@
                 <label
                   class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">AadharNo:</label>
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">12321546757</p>
+                  <p class="mt-2 text-dark font-weight-normal">{{ user.aadharno }}</p>
                 </div>
               </div>
             </div>
@@ -95,17 +95,18 @@
       </div>
     </div>
   </div>
+  </div>
+  {% endfor %} 
 
 
 
 
-
-
-
+  {% for user in Userprofile %}
   <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
     <input type="hidden" name="csrfmiddlewaretoken"
       value="io9a1FUexAEVfui2Q4D0OqJa4eN9bM5ucKVA7yr7EPJzYIthYeRAjqKXIff69ljC">
-    <div class="modal" id="myModal91">
+    <div class="modal" id="myModal{{user.id}}">
       <div class="modal-dialog">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
 
@@ -128,7 +129,7 @@
                 <div class="row pt-4">
                   <div class="col-3 col-sm-4 col-md-4 col-lg-4 "></div>
                   <div class="col-9 col-sm-8 col-md-8 col-lg-8">
-                    <img src="{% static 'assets/images/faces/face2.jpg' %}" id="image"
+                    <img src="{{user.photo.url}}" id="image"
                       class="img-fluid rounded-circle mb-3 " alt="image" style="height:120px; width:120px; ">
                   </div>
 
@@ -155,6 +156,7 @@
       </div>
     </div>
   </form>
+  {% endfor %}
 
 
   {% endblock %}

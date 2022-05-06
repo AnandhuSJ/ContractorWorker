@@ -20,22 +20,19 @@
             </tr>
           </thead>
           <tbody>
+            {% for i in Userdetails %}
             <tr>
-              <td>01</td>
-              <td>Jacob</td>
-              <td>jacob@gmail.com</td>
-              <td>jacob123</td>
-              <td>808204891</td>
-              <td>83127811111</td>
+              <td>{{forloop.counter}}</td>
+              <td>
+                <img src="{{ i.photo.url }}" alt="image" />
+                <span class="ps-2">{{ i.fullname }}</span>
+            </td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.password }}</td>
+            <td>{{ i.mobile }}</td>
+            <td>{{ i.aadharno }}</td>
             </tr>
-            <tr>
-              <td>02</td>
-              <td>Messsy</td>
-              <td>messy@gmail.com</td>
-              <td>messy123</td>
-              <td>758204891</td>
-              <td>56127811111</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         </div>

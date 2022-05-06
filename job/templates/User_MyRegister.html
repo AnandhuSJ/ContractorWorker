@@ -26,38 +26,27 @@
           </tr>
         </thead>
         <tbody>
+          {% for i in myregister %}
           <tr>
-            <td>01</td>
-            <td>Jacob</td>
-            <td>Painter</td>
-            <td>Furniture Making</td>
-            <td>8 years</td>
-            <td>2nd Cross</td>
-            <td>Vallam</td>
-            <td>thanjavur-623431</td>
-            <td>4565464566</td>
-            <td>2500</td>
+            <td>{{forloop.counter}}</td>
+            <td>
+              <img src="{{ i.photo.url }}" alt="image" />
+              <span class="ps-2">{{ i.fullname }}</span>
+          </td>
+          <td>{{ i.worktype }}</td>
+          <td>{{ i.skills }}</td>
+          <td>{{ i.experience }}</td>
+          <td>{{ i.address1 }}</td>
+          <td>{{ i.address2 }}</td>
+          <td>{{ i.cityandpin }}</td>
+          <td>{{ i.aadharno }}</td>
+          <td>{{ i.costdayshrs }}</td>
             <td><a href="{% url 'User_PostFeedback' %}"><button class="btn btn-danger">Feedback</button></a></td>
             <td><button type="button" class="btn btn-sm mx-1 text-light" style="background: rgb(65, 3, 3)"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                 <i class="mdi mdi-comment-multiple-outline"></i> Message </button></td>
           </tr>
-          <tr>
-            <td>02</td>
-            <td>Messsy</td>
-            <td>Carpenter</td>
-            <td>Mathematical Calculation</td>
-            <td>6 years</td>
-            <td>2nd Cross</td>
-            <td>Vallam</td>
-            <td>thanjavur-623431</td>
-            <td>56576535325</td>
-            <td>2200</td>
-            <td><a href="{% url 'User_PostFeedback' %}"><button class="btn btn-danger">Feedback</button></a></td>
-            <td><button type="button" class="btn btn-sm mx-1 text-light" style="background: rgb(65, 3, 3)"
-              data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <i class="mdi mdi-comment-multiple-outline"></i> Message </button></td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
       </div>

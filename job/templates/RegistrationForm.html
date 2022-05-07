@@ -30,7 +30,8 @@
               <div class="auth-form-light text-left p-5">
                 <h4>New here?</h4>
                 <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-                <form class="pt-3">
+                <form class="pt-3" action=""  method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
                   <div class="form-group">
                     <input type="text" class="form-control form-control-lg" name="username" id="exampleInputUsername1" placeholder="Username">
                   </div>
@@ -57,13 +58,10 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" name="education" id="exampleInputEducation1" placeholder="Education">
-                  </div>
-                  <div class="form-group">
                     <label>Profile Photo</label>
-                    <input type="file" name="img[]" class="file-upload-default">
+                    <input type="file" name="pic" class="file-upload-default">
                     <div class="input-group col-xs-12">
-                      <input type="text" class="form-control form-control-lg file-upload-info" name="pic" disabled placeholder="Upload Image">
+                      <input type="text" class="form-control form-control-lg file-upload-info"  disabled placeholder="Upload Image">
                       <span class="input-group-append">
                         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                       </span>
@@ -71,9 +69,9 @@
                   </div>
                   <div class="form-group">
                     <label>ID Proof</label>
-                    <input type="file" name="img[]" class="file-upload-default">
+                    <input type="file" name="id_proof" class="file-upload-default">
                     <div class="input-group col-xs-12">
-                      <input type="text" class="form-control form-control-lg file-upload-info" name="id_proof" disabled placeholder="Upload Image">
+                      <input type="text" class="form-control form-control-lg file-upload-info"  disabled placeholder="Upload Image">
                       <span class="input-group-append">
                         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                       </span>
@@ -81,9 +79,9 @@
                   </div>
                   <div class="form-group">
                     <label>Address Proof</label>
-                    <input type="file" name="img[]" class="file-upload-default">
+                    <input type="file" name="address_proof" class="file-upload-default">
                     <div class="input-group col-xs-12">
-                      <input type="text" class="form-control form-control-lg file-upload-info" name="address_proof" disabled placeholder="Upload Image">
+                      <input type="text" class="form-control form-control-lg file-upload-info"  disabled placeholder="Upload Image">
                       <span class="input-group-append">
                         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                       </span>
@@ -91,6 +89,9 @@
                   </div>
                   <div class="form-group">
                     <input type="text" class="form-control form-control-lg" name="city" id="exampleInputCity1" placeholder="City">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-lg" name="education" id="exampleInputCity1" placeholder="Education">
                   </div>
                   <div class="form-group">
                     <textarea class="form-control form-control-lg" name="skills" id="exampleTextarea1" rows="4" placeholder="Skills"></textarea>
@@ -106,7 +107,7 @@
                     </div>
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{% url 'Login' %}">SIGN UP</a>
+                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                   </div>
                   <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{% url 'Login' %}" class="text-primary">Login</a>
                   </div>
@@ -140,6 +141,9 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'assets/js/file-upload.js' %}"></script>
+    <script src="{% static 'assets/js/typeahead.js' %}"></script>
+    <script src="{% static 'assets/js/select2.js' %}"></script>
     {% if msg_success %}
 <script>
     Swal.fire({

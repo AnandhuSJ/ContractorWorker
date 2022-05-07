@@ -15,14 +15,12 @@
             </tr>
           </thead>
           <tbody>
+            {% for i in workerfeedback %}
             <tr>
-              <td>jacob@gmail.com</td>
-              <td>Good</td>
+              <td>{{ i.fullname }}</td>
+              <td>{{ i.userfeedback }}</td>
             </tr>
-            <tr>
-              <td>messy@gmail.com</td>
-              <td>Bad</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         </div>

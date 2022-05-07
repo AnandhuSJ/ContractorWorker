@@ -4,7 +4,8 @@
         <div class="card-body">
             <h4 class="card-title">Active Workers</h4>
             <div class="form-group">
-                <input type="text" class="form-control" onkeyup="myFunction()" id="search" name="search" autocomplete="off" placeholder="Search...">
+                <input type="text" class="form-control" onkeyup="myFunction()" id="search" name="search"
+                    autocomplete="off" placeholder="Search...">
             </div>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -25,34 +26,26 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for i in workerdetails %}
                         <tr>
-                            <td>01</td>
-                            <td>Jacob</td>
-                            <td>Painter</td>
-                            <td>Furniture Making</td>
-                            <td>8 years</td>
-                            <td>2nd Cross</td>
-                            <td>Vallam</td>
-                            <td>thanjavur-623431</td>
-                            <td>4565464566</td>
-                            <td>2500</td>
-                            <td>Approval</td>
-                            <td><a href="{% url 'Worker_UpdateWorkDetails' %}"><button class="btn btn-primary">Update</button></a></td>
+                            <td>{{forloop.counter}}</td>
+                            <td>
+                                <img src="{{ i.photo.url }}" alt="image" />
+                                <span class="ps-2">{{ i.fullname }}</span>
+                            </td>
+                            <td>{{ i.worktype }}</td>
+                            <td>{{ i.skills }}</td>
+                            <td>{{ i.experience }}</td>
+                            <td>{{ i.address1 }}</td>
+                            <td>{{ i.address2 }}</td>
+                            <td>{{ i.cityandpin }}</td>
+                            <td>{{ i.aadharno }}</td>
+                            <td>{{ i.costdayshrs }}</td>
+                            <td>{{ i.status }}</td>
+                            <td><a href="{% url 'Worker_UpdateWorkDetails' %}"><button
+                                        class="btn btn-primary">Update</button></a></td>
                         </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Messsy</td>
-                            <td>Carpenter</td>
-                            <td>Mathematical Calculation</td>
-                            <td>6 years</td>
-                            <td>2nd Cross</td>
-                            <td>Vallam</td>
-                            <td>thanjavur-623431</td>
-                            <td>56576535325</td>
-                            <td>2200</td>
-                            <td>Approval</td>
-                            <td><a href="{% url 'Worker_UpdateWorkDetails' %}"><button class="btn btn-primary">Update</button></a></td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -79,5 +72,5 @@
             }
         }
     }
-  </script>
+</script>
 {% endblock %}

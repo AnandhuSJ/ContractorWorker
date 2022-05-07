@@ -1,5 +1,5 @@
 {% extends 'Contractor_index.html'%} {% load static %} {% block content %}
-
+{% for i in contractorprofile %}
 <div class="row">
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
@@ -7,7 +7,7 @@
 
                 <center>
                     <h3 class="card-title mt-2">PROFILE</h3>
-                    <img src="{% static 'assets/images/faces/face27.jpg' %}" class="w-50 h-50 mt-2"
+                    <img src="{{ i.photo.url }}" class="w-50 h-50 mt-2"
                         style="border-radius: 50%;" />
                     
                         <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
@@ -18,7 +18,7 @@
                                 <!-- <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p> -->
                             </div>
                             <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                <h6 class=" mb-0 text-dark font-weight-normal">23-05-2022</h6>
+                                <h6 class=" mb-0 text-dark font-weight-normal">{{ i.joiningdate|date:'d-m-Y' }}</h6>
                             </div>
                         </div>
                         <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
@@ -27,7 +27,7 @@
                                 <!-- <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p> -->
                             </div>
                             <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                <h6 class=" mb-0 text-dark font-weight-normal">10-02-1999</h6>
+                                <h6 class=" mb-0 text-dark font-weight-normal">{{ i.dateofbirth }}</h6>
                             </div>
                         </div>
                 </center>
@@ -46,7 +46,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">Name</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">Jaison</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.fullname }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">Gender</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">Male</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.gender }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">Contact Number</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">904856804</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.mobile }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">E-mail</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">jaison@gmail.com</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.email }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">Education</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">Degree</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.education }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">Experience</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">2 Years</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.experience }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                         <h4 class="preview-subject text-dark font-weight-normal">Skills</h4>
                                     </div>
                                     <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                        <h4 class="preview-subject text-dark font-weight-normal">Furniture Making,Mathematical Calculation</h4>
+                                        <h4 class="preview-subject text-dark font-weight-normal">{{ i.skills }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -117,5 +117,5 @@
         </div>
     </div>
 </div>
-
+{% endfor %}
 {% endblock %}

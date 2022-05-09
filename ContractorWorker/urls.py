@@ -60,6 +60,7 @@ urlpatterns = [
      
      re_path(r'^Worker_index$', views.Worker_index, name='Worker_index'),
      re_path(r'^Worker_AddWorkDetails$', views.Worker_AddWorkDetails, name='Worker_AddWorkDetails'),
+     re_path(r'^Worker_AddWorkDetailssave/(?P<id>\d+)/$', views.Worker_AddWorkDetailssave, name='Worker_AddWorkDetailssave'),
      re_path(r'^Worker_ViewWorkDetails$', views.Worker_ViewWorkDetails, name='Worker_ViewWorkDetails'),
      re_path(r'^Worker_UpdateWorkDetails$', views.Worker_UpdateWorkDetails, name='Worker_UpdateWorkDetails'),
      re_path(r'^Worker_ViewFeedbackDetails$', views.Worker_ViewFeedbackDetails, name='Worker_ViewFeedbackDetails'),
@@ -71,6 +72,7 @@ urlpatterns = [
     
      re_path(r'^Contractor_index$', views.Contractor_index, name='Contractor_index'),
      re_path(r'^Contractor_AddWorkDetails$', views.Contractor_AddWorkDetails, name='Contractor_AddWorkDetails'),
+     re_path(r'^Contractor_AddWorkDetailssave/(?P<id>\d+)/$', views.Contractor_AddWorkDetailssave, name='Contractor_AddWorkDetailssave'),
      re_path(r'^Contractor_ViewWorkDetails$', views.Contractor_ViewWorkDetails, name='Contractor_ViewWorkDetails'),
      re_path(r'^Contractor_UpdateWorkDetails$', views.Contractor_UpdateWorkDetails, name='Contractor_UpdateWorkDetails'),
      re_path(r'^Contractor_PostFeedbackDetails$', views.Contractor_PostFeedbackDetails, name='Contractor_PostFeedbackDetails'),

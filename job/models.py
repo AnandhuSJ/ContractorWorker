@@ -33,8 +33,8 @@ class user_registration(models.Model):
     password = models.CharField(max_length=240, null=True)
     education = models.CharField(max_length=240, null=True)
     experience = models.CharField(max_length=240, null=True)
+    work = models.CharField(max_length=240, null=True, default='')
     skills = models.CharField(max_length=240, null=True)
-    userfeedback = models.CharField(max_length=240, null=True)
     idproof = models.FileField(upload_to='images/', null=True, blank=True)
     addressproof = models.FileField(upload_to='images/', null=True, blank=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
@@ -50,4 +50,15 @@ class user_registration(models.Model):
     def __str__(self):
         return self.fullname
 
+    
+class Feedback(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='Feedbackuser', null=True, blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
+                                    related_name='Feedbackdesignation', null=True, blank=True)
+    workerid = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='Feedbackworkerid', null=True, blank=True)                                
+    userfeedback = models.CharField(max_length=240, null=True)
+    workerfeedback = models.EmailField(max_length=240, null=True)
+    contractorfeedback = models.CharField(max_length=240, null=True)
     

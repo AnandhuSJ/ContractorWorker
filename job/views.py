@@ -3,18 +3,19 @@ import random
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from job.models import *
-from datetime import datetime,date
+from datetime import datetime, date
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 from django. contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User, auth
 from django.contrib.auth.hashers import check_password, make_password
 from django.shortcuts import render
 from django.core.mail import send_mail
 
 # Create your views here.
+
 
 def Login(request):
 
@@ -22,52 +23,56 @@ def Login(request):
        Worker = designation.objects.get(designation="Worker")
        Contractor = designation.objects.get(designation="Contractor")
        if request.method == 'POST':
-        email  = request.POST['email']
+        email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(username=email,password=password)
+        user = authenticate(username=email, password=password)
         if user is not None:
             request.session['SAdm_id'] = user.id
-            return redirect( 'SuperAdmin_index')
+            return redirect('SuperAdmin_index')
 
-        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=User.id,status="Approval" or "approval").exists():
-                
-                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'], designation=User.id, status="Approval" or "approval").exists():
+
+                member = user_registration.objects.get(
+                    email=request.POST['email'], password=request.POST['password'])
                 request.session['Usr_id'] = member.designation_id
                 request.session['usernamets1'] = member.fullname
-                request.session['Usr_id'] = member.id 
-                mem=user_registration.objects.filter(id= member.id)
-                
-                return render(request,'User_index.html',{'mem':mem})
+                request.session['Usr_id'] = member.id
+                mem = user_registration.objects.filter(id=member.id)
 
-        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=Worker.id,status="Approval" or "Approval").exists():
-                
-                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                return render(request, 'User_index.html', {'mem': mem})
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'], designation=Worker.id, status="Approval" or "Approval").exists():
+
+                member = user_registration.objects.get(
+                    email=request.POST['email'], password=request.POST['password'])
                 request.session['Wkr_id'] = member.designation_id
                 request.session['usernamets1'] = member.fullname
-                request.session['Wkr_id'] = member.id 
-                mem1=user_registration.objects.filter(id= member.id)
-                
-                return render(request,'Worker_index.html',{'mem1':mem1})
+                request.session['Wkr_id'] = member.id
+                mem1 = user_registration.objects.filter(id=member.id)
 
-        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],designation=Contractor.id,status="Approval" or "Approval").exists():
-                
-                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                return render(request, 'Worker_index.html', {'mem1': mem1})
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'], designation=Contractor.id, status="Approval" or "Approval").exists():
+
+                member = user_registration.objects.get(
+                    email=request.POST['email'], password=request.POST['password'])
                 request.session['Cntr_id'] = member.designation_id
                 request.session['usernamets1'] = member.fullname
-                request.session['Cntr_id'] = member.id 
-                mem2=user_registration.objects.filter(id= member.id)
-                
-                return render(request,'Contractor_index.html',{'mem2':mem2})        
+                request.session['Cntr_id'] = member.id
+                mem2 = user_registration.objects.filter(id=member.id)
+
+                return render(request, 'Contractor_index.html', {'mem2': mem2})
         else:
             context = {'msg_error': 'Invalid data'}
             return render(request, 'login.html', context)
-       return render(request,'login.html')
-
+       return render(request, 'login.html')
 
 
 def RegistrationForm(request):
-     if request.method == 'POST':
+    des = designation.objects.get(designation='Worker')
+    if request.method == 'POST':
         acc = user_registration()
+        acc.designation = des
         acc.fullname = request.POST['username']
         acc.gender = request.POST['gender']
         acc.email = request.POST['email']
@@ -84,13 +89,15 @@ def RegistrationForm(request):
         acc.experience = request.POST['experience']
         acc.save()
         msg_success = "Registration successfully Check Your Registered Mail"
-        return render(request,'RegistrationForm.html',{'msg_success': msg_success})
-     return render(request,'RegistrationForm.html')
+        return render(request, 'RegistrationForm.html', {'msg_success': msg_success})
+    return render(request, 'RegistrationForm.html')
 
 
 def RegistrationFormUser(request):
+      des = designation.objects.get(designation='User')
       if request.method == 'POST':
         usr = user_registration()
+        usr.designation = des
         usr.fullname = request.POST['username']
         usr.password = request.POST['psswd']
         usr.email = request.POST['email']
@@ -99,10 +106,10 @@ def RegistrationFormUser(request):
         usr.photo = request.FILES['pic']
         usr.save()
         msg_success = "Registration successfull Check Your Registered Mail"
-        return render(request,'RegistrationFormUser.html',{'msg_success': msg_success}) 
-      return render(request,'RegistrationFormUser.html')      
-        
-       
+        return render(request, 'RegistrationFormUser.html', {'msg_success': msg_success})
+      return render(request, 'RegistrationFormUser.html')
+
+
 def SuperAdmin_Accountsett(request):
     if 'SAdm_id' in request.session:
         if request.session.has_key('SAdm_id'):
@@ -126,12 +133,10 @@ def SuperAdmin_Accountsett(request):
     else:
         return redirect('/')
 
+
 def SuperAdmin_logout(request):
     request.session.flush()
     return redirect("/")
-
-
-
 
 
 def SuperAdmin_index(request):
@@ -139,20 +144,22 @@ def SuperAdmin_index(request):
          if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
-        
-         return render(request, 'SuperAdmin_index.html',{'users':users}) 
+
+         return render(request, 'SuperAdmin_index.html', {'users': users})
     else:
         return redirect('/')
+
 
 def SuperAdmin_WorkerWorkDetails_cards(request):
      if 'SAdm_id' in request.session:
          if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
-        
-         return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html',{'users':users})
+
+         return render(request, 'SuperAdmin_WorkerWorkDetails_cards.html', {'users': users})
      else:
         return redirect('/')
+
 
 def SuperAdmin_ActiveWorkerWorkDetails_table(request):
      if 'SAdm_id' in request.session:
@@ -160,20 +167,22 @@ def SuperAdmin_ActiveWorkerWorkDetails_table(request):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
          des = designation.objects.get(designation='Worker')
-         AWorker = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all().order_by('-id')
-         return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html',{'users':users,'AWorker':AWorker,'des':des}) 
+         AWorker = user_registration.objects.filter(designation_id=des).filter(
+             status='approval' or 'Approval').all().order_by('-id')
+         return render(request, 'SuperAdmin_ActiveWorkerWorkDetails_table.html', {'users': users, 'AWorker': AWorker, 'des': des})
      else:
         return redirect('/')
 
-def SuperAdmin_ActiveWorkerWorkDetails_save(request,id):
-    
-   
+
+def SuperAdmin_ActiveWorkerWorkDetails_save(request, id):
+
     if request.method == 'POST':
        a = user_registration.objects.get(id=id)
        a.status = request.POST['status']
        a.save()
-     
+
        return redirect('SuperAdmin_WorkerWorkDetails_cards')
+
 
 def SuperAdmin_PreviousWorkerWorkDetails_table(request):
      if 'SAdm_id' in request.session:
@@ -181,18 +190,20 @@ def SuperAdmin_PreviousWorkerWorkDetails_table(request):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
          des = designation.objects.get(designation='Worker')
-         PWorker = user_registration.objects.filter(designation_id = des).filter(status='reject' or 'Reject').all().order_by('-id')
-         return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html',{'users':users,'PWorker':PWorker,'des':des})              
+         PWorker = user_registration.objects.filter(designation_id=des).filter(
+             status='reject' or 'Reject').all().order_by('-id')
+         return render(request, 'SuperAdmin_PreviousWorkerWorkDetails_table.html', {'users': users, 'PWorker': PWorker, 'des': des})
      else:
         return redirect('/')
+
 
 def SuperAdmin_ContractorWorkDetails_cards(request):
       if 'SAdm_id' in request.session:
          if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
-        
-         return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html',{'users':users})     
+
+         return render(request, 'SuperAdmin_ContractorWorkDetails_cards.html', {'users': users})
       else:
         return redirect('/')
 
@@ -203,19 +214,20 @@ def SuperAdmin_ActiveContractorWorkDetails_table(request):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
          des = designation.objects.get(designation='Contractor')
-         AContractor = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all().order_by('-id')
-         return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html',{'users':users,'AContractor':AContractor,'des':des})  
+         AContractor = user_registration.objects.filter(designation_id=des).filter(
+             status='approval' or 'Approval').all().order_by('-id')
+         return render(request, 'SuperAdmin_ActiveContractorWorkDetails_table.html', {'users': users, 'AContractor': AContractor, 'des': des})
       else:
         return redirect('/')
 
-def SuperAdmin_ActiveContractWorkDetails_save(request,id):
-    
-   
+
+def SuperAdmin_ActiveContractWorkDetails_save(request, id):
+
     if request.method == 'POST':
        a = user_registration.objects.get(id=id)
        a.status = request.POST['status']
        a.save()
-     
+
        return redirect('SuperAdmin_ContractorWorkDetails_cards')
 
 
@@ -225,10 +237,12 @@ def SuperAdmin_PreviousContractorWorkDetails_table(request):
             SAdm_id = request.session['SAdm_id']
          users = User.objects.filter(id=SAdm_id)
          des = designation.objects.get(designation='Contractor')
-         PContractor = user_registration.objects.filter(designation_id = des).filter(status='reject' or 'Reject').all().order_by('-id')
-         return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html',{'users':users,'PContractor':PContractor,'des':des})
+         PContractor = user_registration.objects.filter(designation_id=des).filter(
+             status='reject' or 'Reject').all().order_by('-id')
+         return render(request, 'SuperAdmin_PreviousContractorWorkDetails_table.html', {'users': users, 'PContractor': PContractor, 'des': des})
       else:
         return redirect('/')
+
 
 def SuperAdmin_UserDetails(request):
        if 'SAdm_id' in request.session:
@@ -236,9 +250,9 @@ def SuperAdmin_UserDetails(request):
             SAdm_id = request.session['SAdm_id']
         users = User.objects.filter(id=SAdm_id)
         des = designation.objects.get(designation='User')
-        Userdetails = user_registration.objects.filter(designation_id = des).all().order_by('-id')
-       return render(request, 'SuperAdmin_UserDetails.html',{'users':users,'Userdetails':Userdetails,'des':des})       
-
+        Userdetails = user_registration.objects.filter(
+            designation_id=des).all().order_by('-id')
+       return render(request, 'SuperAdmin_UserDetails.html', {'users': users, 'Userdetails': Userdetails, 'des': des})
 
 
 def User_Accsetting(request):
@@ -248,7 +262,7 @@ def User_Accsetting(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Usr_id)
-       
+
         if request.method == 'POST':
                acc = user_registration()
                acc.fullname = request.POST['username']
@@ -260,13 +274,12 @@ def User_Accsetting(request):
                acc.save()
                msg_success = "Accounts changed successfully"
                return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
-        return render(request,'User_Accsetting.html',{'mem':mem})
+        return render(request, 'User_Accsetting.html', {'mem': mem})
     else:
         return redirect('/')
-        
 
 
-def User_Profile_Imagechange(request,id):
+def User_Profile_Imagechange(request, id):
     if request.method == 'POST':
         ab = user_registration.objects.get(id=id)
         ab.photo = request.FILES['files']
@@ -274,7 +287,8 @@ def User_Profile_Imagechange(request,id):
         msg_success = "Profile Picture changed successfully"
         return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
 
-def User_Changepwd(request,id):
+
+def User_Changepwd(request, id):
     if request.method == 'POST':
         ac = user_registration.objects.get(id=id)
         oldps = request.POST['currentPassword']
@@ -288,11 +302,13 @@ def User_Changepwd(request,id):
                 return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
 
         elif oldps == newps:
-            messages.add_message(request, messages.INFO, 'Current and New password same')
+            messages.add_message(request, messages.INFO,
+                                 'Current and New password same')
         else:
             messages.info(request, 'Incorrect password same')
 
         return redirect('User_Accsetting')
+
 
 def User_logout(request):
     if 'Usr_id' in request.session:
@@ -300,7 +316,6 @@ def User_logout(request):
         return redirect('/')
     else:
         return redirect('/')
-            
 
 
 def User_index(request):
@@ -310,11 +325,12 @@ def User_index(request):
          else:
             return redirect('/')
          mem = user_registration.objects.filter(id=Usr_id)
-        
-         return render(request, 'User_index.html',{'mem':mem})
+
+         return render(request, 'User_index.html', {'mem': mem})
      else:
         return redirect('/')
-            
+
+
 def User_MyProfile(request):
       if 'Usr_id' in request.session:
           if request.session.has_key('Usr_id'):
@@ -323,11 +339,13 @@ def User_MyProfile(request):
             return redirect('/')
           mem = user_registration.objects.filter(id=Usr_id)
           des = designation.objects.get(designation='User')
-          Userprofile = user_registration.objects.filter(designation_id = des).all()
-          return render(request, 'User_MyProfile.html',{'mem':mem,'Userprofile':Userprofile,'des':des})
+          Userprofile = user_registration.objects.filter(
+              designation_id=des).all()
+          return render(request, 'User_MyProfile.html', {'mem': mem, 'Userprofile': Userprofile, 'des': des})
       else:
         return redirect('/')
-            
+
+
 def User_MyRegister(request):
      if 'Usr_id' in request.session:
         if request.session.has_key('Usr_id'):
@@ -336,10 +354,12 @@ def User_MyRegister(request):
             return redirect('/')
         mem = user_registration.objects.filter(id=Usr_id)
         des = designation.objects.get(designation='Worker')
-        myregister = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all()
-        return render(request, 'User_MyRegister.html',{'mem':mem,'myregister':myregister,'des':des})
+        myregister = user_registration.objects.filter(
+            designation_id=des).filter(status='approval' or 'Approval').all()
+        return render(request, 'User_MyRegister.html', {'mem': mem, 'myregister': myregister, 'des': des})
      else:
         return redirect('/')
+
 
 def User_PostFeedback(request):
     if 'Usr_id' in request.session:
@@ -356,12 +376,11 @@ def User_PostFeedback(request):
                feed.save()
                msg_success = "Feedback given successfully"
                return render(request, 'User_Accsetting.html', {'msg_success': msg_success})
-        return render(request,'User_Accsetting.html',{'mem':mem})
+        return render(request, 'User_Accsetting.html', {'mem': mem})
     else:
         return redirect('/')
-    
-        
-             
+
+
 def User_ViewWorkDetails_card(request):
     if 'Usr_id' in request.session:
          if request.session.has_key('Usr_id'):
@@ -369,12 +388,11 @@ def User_ViewWorkDetails_card(request):
          else:
             return redirect('/')
          mem = user_registration.objects.filter(id=Usr_id)
-        
-         return render(request, 'User_ViewWorkDetails_card.html',{'mem':mem})
+
+         return render(request, 'User_ViewWorkDetails_card.html', {'mem': mem})
     else:
         return redirect('/')
-        
-       
+
 
 def User_WorkerDetails_table(request):
      if 'Usr_id' in request.session:
@@ -384,13 +402,14 @@ def User_WorkerDetails_table(request):
             return redirect('/')
          mem = user_registration.objects.filter(id=Usr_id)
          des = designation.objects.get(designation='Worker')
-         workerdetails = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all()
-         return render(request, 'User_WorkerDetails_table.html',{'mem':mem,'workerdetails':workerdetails,'des':des})
+         workerdetails = user_registration.objects.filter(
+             designation_id=des).filter(status='approval' or 'Approval').all()
+         return render(request, 'User_WorkerDetails_table.html', {'mem': mem, 'workerdetails': workerdetails, 'des': des})
      else:
         return redirect('/')
-        
-      
-def User_ContractorDetails_table(request):   
+
+
+def User_ContractorDetails_table(request):
      if 'Usr_id' in request.session:
          if request.session.has_key('Usr_id'):
             Usr_id = request.session['Usr_id']
@@ -398,14 +417,11 @@ def User_ContractorDetails_table(request):
             return redirect('/')
          mem = user_registration.objects.filter(id=Usr_id)
          des = designation.objects.get(designation='Contractor')
-         contractordetails = user_registration.objects.filter(designation_id = des).filter(status='approval' or 'Approval').all()
-         return render(request, 'User_ContractorDetails_table.html',{'mem':mem,'contractordetails':contractordetails,'des':des})
+         contractordetails = user_registration.objects.filter(
+             designation_id=des).filter(status='approval' or 'Approval').all()
+         return render(request, 'User_ContractorDetails_table.html', {'mem': mem, 'contractordetails': contractordetails, 'des': des})
      else:
         return redirect('/')
-        
-
-
-
 
 
 def Worker_Accsetting(request):
@@ -436,11 +452,12 @@ def Worker_Accsetting(request):
             acc.save()
             msg_success = "Accounts changed successfully"
             return render(request, 'Worker_Accsetting.html', {'msg_success': msg_success})
-        return render(request,'Worker_Accsetting.html',{'mem1':mem1})
+        return render(request, 'Worker_Accsetting.html', {'mem1': mem1})
     else:
         return redirect('/')
 
-def Worker_Profile_Imagechange(request,id):
+
+def Worker_Profile_Imagechange(request, id):
     if request.method == 'POST':
         ab = user_registration.objects.get(id=id)
         ab.photo = request.FILES['files']
@@ -448,7 +465,8 @@ def Worker_Profile_Imagechange(request,id):
         msg_success = "Profile Picture changed successfully"
         return render(request, 'Worker_Accsetting.html', {'msg_success': msg_success})
 
-def Worker_Changepwd(request,id):
+
+def Worker_Changepwd(request, id):
     if request.method == 'POST':
         ac = user_registration.objects.get(id=id)
         oldps = request.POST['currentPassword']
@@ -461,18 +479,21 @@ def Worker_Changepwd(request,id):
                 msg_success = "Password changed successfully"
                 return render(request, 'Worker_Accsetting.html', {'msg_success': msg_success})
         elif oldps == newps:
-            messages.add_message(request, messages.INFO, 'Current and New password same')
+            messages.add_message(request, messages.INFO,
+                                 'Current and New password same')
         else:
             messages.info(request, 'Incorrect password same')
 
         return redirect('Worker_Accsetting')
-    
+
+
 def Worker_logout(request):
     if 'Wkr_id' in request.session:
         request.session.flush()
         return redirect('/')
     else:
         return redirect('/')
+
 
 def Worker_index(request):
     if 'Wkr_id' in request.session:
@@ -481,8 +502,8 @@ def Worker_index(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=Wkr_id)
-        
-        return render(request, 'Worker_index.html',{'mem1':mem1})  
+
+        return render(request, 'Worker_index.html', {'mem1': mem1})
     else:
         return redirect('/')
 
@@ -493,28 +514,31 @@ def Worker_AddWorkDetails(request):
             Wkr_id = request.session['Wkr_id']
         else:
             return redirect('/')
-        mem1 = user_registration.objects.filter(id=Wkr_id)
-        if request.method == 'POST':
-            workdetails = user_registration()
-            des = designation()
-            des.id = request.get['id']
-            workdetails.fullname = request.POST['workername']
-            workdetails.worktype = request.POST['workertype']
-            workdetails.skills = request.POST['skills']
-            workdetails.experience = request.POST['experience']
-            workdetails.address1 = request.POST['address1']
-            workdetails.address2 = request.POST['address2']
-            workdetails.cityandpin = request.POST['cityandpin']
-            workdetails.mobile = request.POST['mobile']
-            workdetails.aadharno = request.POST['aadharno']
-            workdetails.costdayshrs = request.POST['costdayshrs'] 
-            workdetails.save()
-            msg_success = "Work Details Added successfully"
-            return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
-        return render(request, 'Worker_AddWorkDetails.html',{'mem1':mem1})  
+        mem1 = user_registration.objects.get(id=Wkr_id)
+        return render(request, 'Worker_AddWorkDetails.html', {'mem1': mem1,'Wkr_id': Wkr_id})
     else:
         return redirect('/')
-         
+
+
+def Worker_AddWorkDetailssave(request, id):
+    a = user_registration.objects.get(id=id)
+    if request.method == 'POST':
+        a.fullname = request.POST['workername']
+        a.worktype = request.POST['workertype']
+        a.skills = request.POST['skills']
+        a.experience = request.POST['experience']
+        a.address1 = request.POST['address1']
+        a.address2 = request.POST['address2']
+        a.cityandpin = request.POST['cityandpin']
+        a.mobile = request.POST['mobile']
+        a.aadharno = request.POST['aadharno']
+        a.costdayshrs = request.POST['costdayshrs']
+        a.save()
+        msg_success = "Work Details Added successfully"
+        return render(request, 'Worker_AddWorkDetails.html',{'msg_success': msg_success,'Wkr_id':id})
+    else:
+        return render(request, 'Worker_AddWorkDetails.html')
+        
 
 
 def Worker_ViewWorkDetails(request):
@@ -538,29 +562,31 @@ def Worker_UpdateWorkDetails(request):
             Wkr_id = request.session['Wkr_id']
         else:
             return redirect('/')
-        mem1 = user_registration.objects.filter(id=Wkr_id)
-        if request.method == 'POST':
-            workdetails = user_registration()
-            des = designation()
-            des.id = request.get['id']
-            workdetails.fullname = request.POST['workername']
-            workdetails.worktype = request.POST['workertype']
-            workdetails.skills = request.POST['skills']
-            workdetails.experience = request.POST['experience']
-            workdetails.address1 = request.POST['address1']
-            workdetails.address2 = request.POST['address2']
-            workdetails.cityandpin = request.POST['cityandpin']
-            workdetails.mobile = request.POST['mobile']
-            workdetails.aadharno = request.POST['aadharno']
-            workdetails.costdayshrs = request.POST['costdayshrs'] 
-            workdetails.save()
-            msg_success = "Work Details Updated successfully"
-            return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
-        return render(request, 'Worker_UpdateWorkDetails.html',{'mem1':mem1})  
+        mem1 = user_registration.objects.get(id=Wkr_id)
+        return render(request, 'Worker_UpdateWorkDetails.html', {'mem1': mem1,'Wkr_id': Wkr_id})
     else:
         return redirect('/')
          
-                     
+
+def Worker_UpdateWorkDetailssave(request, id):
+    a = user_registration.objects.get(id=id)
+    if request.method == 'POST':
+        a.fullname = request.POST['workername']
+        a.worktype = request.POST['workertype']
+        a.skills = request.POST['skills']
+        a.experience = request.POST['experience']
+        a.address1 = request.POST['address1']
+        a.address2 = request.POST['address2']
+        a.cityandpin = request.POST['cityandpin']
+        a.mobile = request.POST['mobile']
+        a.aadharno = request.POST['aadharno']
+        a.costdayshrs = request.POST['costdayshrs']
+        a.save()
+        msg_success = "Work Details Updated successfully"
+        return render(request, 'Worker_ViewWorkDetails.html',{'msg_success': msg_success,'Wkr_id':id})
+    else:
+        return render(request, 'Worker_UpdateWorkDetails.html')
+
 
 def Worker_ViewFeedbackDetails(request):
     if 'Wkr_id' in request.session:
@@ -670,34 +696,38 @@ def Contractor_index(request):
     else:
         return redirect('/')
 
-
 def Contractor_AddWorkDetails(request):
     if 'Cntr_id' in request.session:
         if request.session.has_key('Cntr_id'):
             Cntr_id = request.session['Cntr_id']
         else:
             return redirect('/')
-        mem2 = user_registration.objects.filter(id=Cntr_id)
-        if request.method == 'POST':
-            Contractordetails = user_registration()
-            des = designation()
-            des.id = request.get['id']
-            Contractordetails.fullname = request.POST['contractorname']
-            Contractordetails.contracttype = request.POST['contractortype']
-            Contractordetails.skills = request.POST['skills']
-            Contractordetails.experience = request.POST['experience']
-            Contractordetails.address1 = request.POST['address1']
-            Contractordetails.address2 = request.POST['address2']
-            Contractordetails.cityandpin = request.POST['cityandpin']
-            Contractordetails.mobile = request.POST['mobile']
-            Contractordetails.aadharno = request.POST['aadharno']
-            Contractordetails.costdayshrs = request.POST['costdayshrs'] 
-            Contractordetails.save()
-            msg_success = "Work Details Updated successfully"
-            return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
-        return render(request, 'Contractor_AddWorkDetails.html',{'mem2':mem2}) 
+        mem2 = user_registration.objects.get(id=Cntr_id)
+        return render(request, 'Contractor_AddWorkDetails.html', {'mem2': mem2,'Cntr_id': Cntr_id})
     else:
         return redirect('/')
+
+
+def Contractor_AddWorkDetailssave(request,id):
+        b = user_registration.objects.get(id=id)
+        if request.method == 'POST':
+            b = user_registration()
+            b.fullname = request.POST['contractorname']
+            b.contracttype = request.POST['contractortype']
+            b.skills = request.POST['skills']
+            b.experience = request.POST['experience']
+            b.address1 = request.POST['address1']
+            b.address2 = request.POST['address2']
+            b.cityandpin = request.POST['cityandpin']
+            b.mobile = request.POST['mobile']
+            b.aadharno = request.POST['aadharno']
+            b.costdayshrs = request.POST['costdayshrs'] 
+            b.save()
+            msg_success = "Work Details Updated successfully"
+            return render(request, 'Contractor_AddWorkDetails.html', {'msg_success': msg_success,'Cntr_id':id})
+        else:    
+            return render(request, 'Contractor_AddWorkDetails.html') 
+       
         
       
 
@@ -722,28 +752,31 @@ def Contractor_UpdateWorkDetails(request):
             Cntr_id = request.session['Cntr_id']
         else:
             return redirect('/')
-        mem2 = user_registration.objects.filter(id=Cntr_id)
-        if request.method == 'POST':
-            Contractordetails = user_registration()
-            des = designation()
-            des.id = request.get['id']
-            Contractordetails.fullname = request.POST['contractorname']
-            Contractordetails.contracttype = request.POST['contractortype']
-            Contractordetails.skills = request.POST['skills']
-            Contractordetails.experience = request.POST['experience']
-            Contractordetails.address1 = request.POST['address1']
-            Contractordetails.address2 = request.POST['address2']
-            Contractordetails.cityandpin = request.POST['cityandpin']
-            Contractordetails.mobile = request.POST['mobile']
-            Contractordetails.aadharno = request.POST['aadharno']
-            Contractordetails.costdayshrs = request.POST['costdayshrs'] 
-            Contractordetails.save()
-            msg_success = "Work Details Updated successfully"
-            return render(request, 'Contractor_Accsetting.html', {'msg_success': msg_success})
-        return render(request, 'Contractor_UpdateWorkDetails.html',{'mem2':mem2}) 
+        mem2 = user_registration.objects.get(id=Cntr_id)
+        return render(request, 'Contractor_UpdateWorkDetails.html', {'mem2': mem2,'Cntr_id': id})
     else:
-        return redirect('/')
-        
+        return redirect('/')        
+
+def Contractor_UpdateWorkDetailssave(request,id):
+        b = user_registration.objects.get(id=id)
+        if request.method == 'POST':
+            b = user_registration()
+            b.fullname = request.POST['contractorname']
+            b.contracttype = request.POST['contractortype']
+            b.skills = request.POST['skills']
+            b.experience = request.POST['experience']
+            b.address1 = request.POST['address1']
+            b.address2 = request.POST['address2']
+            b.cityandpin = request.POST['cityandpin']
+            b.mobile = request.POST['mobile']
+            b.aadharno = request.POST['aadharno']
+            b.costdayshrs = request.POST['costdayshrs'] 
+            b.save()
+            msg_success = "Work Details Updated successfully"
+            return render(request, 'Contractor_ViewWorkDetails.html', {'msg_success': msg_success,'Cntr_id':id})
+        else:    
+           return render(request, 'Contractor_UpdateWorkDetails.html') 
+   
 
 def Contractor_PostFeedbackDetails(request):
     if 'Cntr_id' in request.session:

@@ -22,6 +22,8 @@
                             <th>Cost days/Hrs</th>
                             <th>Status</th>
                             <th>Update</th>
+                            <th>Feedback</th>
+                            <th>ViewFeedback</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,6 +45,10 @@
                             <td>{{ i.costdayshrs }}</td>
                             <td>{{ i.status }}</td>
                             <td><a href="{% url 'Contractor_UpdateWorkDetails' %}"><button class="btn btn-primary">Update</button></a></td>
+                            <td><a href="{% url 'User_PostFeedback' %}"><button class="btn btn-danger">Feedback</button></a></td>
+            <td><button type="button" class="btn btn-sm mx-1 text-light" style="background: rgb(65, 3, 3)"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class="mdi mdi-comment-multiple-outline"></i> Message </button></td>
                         </tr>
                         {% endfor %}
                     </tbody>

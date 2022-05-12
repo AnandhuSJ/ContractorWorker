@@ -16,6 +16,8 @@
               <th>Work</th>
               <th>Work Type</th>
               <th>Skills</th>
+              <th>Feedback</th>
+              <th>ViewFeedback</th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +31,8 @@
             <td></td>
             <td>{{ i.worktype }}</td>
             <td>{{ i.skills }}</td>
+            <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{i.id}}">Give Feedback</button></td>
+            <td><button type="button" class="btn btn-sm mx-1 text-light" data-toggle="modal" data-target="#myModal1{{i.id}}" style="background: rgb(65, 3, 3)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="mdi mdi-comment-multiple-outline"></i>Previous Feedbacks</button></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -37,7 +41,97 @@
       </div>
     </div>
   </div>
+  
+  {% for i in workerdetails %}
+<div class="modal" id="myModal{{i.id}}" >
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
 
+            <!-- Modal Header -->
+            <div class="modal-header" >
+                <h4 class="modal-title">Feedback about {{ i.fullname }}</h4>
+                <button type="button " class="close" style="color:black;"
+                    data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" >
+                <form action="{% url 'usr_feedback' i.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card">
+                        <div class="card-body" >
+                            <div class="row p-3">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                                    <textarea class="col-12 col-sm-12 col-md-12 col-lg-12 form-control  text-dark"
+                                        style="height: 100px; background-color:white; " name="feedback"
+                                        rows="4"> </textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div  style="float:right;padding-bottom:20px;">
+                                <button type="submit" 
+                                    class="btn btn-outline-primary btn-icon-text ">
+                                    <i class="text-primary mdi mdi-send btn-icon-prepend"></i>
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% for i in workerdetails %}
+<div class="modal" id="myModal1{{i.id}}" >
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header" >
+                <h4 class="modal-title">Feedbacks of {{ i.fullname }}</h4>
+                <button type="button " class="close" style="color:black;"
+                    data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" >
+                <div class="card">
+                    <div class="card-body" >
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Reported By</th>
+                                        <th>Reporter designation</th>
+                                        <th>Feedback</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for j in fed %}
+                                    {% if i.id == j.user.id %}
+                                    <tr>
+                                        <td>{{ j.reporterid.fullname }}</td>
+                                        <td>{{ j.reporterid.designation }}</td>
+                                        <td>{{ j.feedback }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
   <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;

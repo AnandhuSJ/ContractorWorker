@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
   </head>
   <body>
     <div class="container-scroller">
@@ -32,22 +37,22 @@
         </div> 
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           
-          
+       
           <ul class="navbar-nav navbar-nav-right">
             
            
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="{% static 'assets/images/faces/face27.jpg' %}" alt="image">
+                  {% for i in mem2 %}  <img src="{{ i.photo.url }}" alt="image"> {% endfor %}
                 </div>
                 <div class="nav-profile-text">
-                  {% for i in mem2 %} <p class="mb-1 text-black">Henry Klein </p>{% endfor %}
+                  {% for i in mem2 %}     <p class="mb-1 text-black">{{ i.fullname }}</p> {% endfor %}
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                 <div class="p-3 text-center bg-primary">
-                  <img class="img-avatar img-avatar48 img-avatar-thumb" src="{% static 'assets/images/faces/face27.jpg' %}" alt="">
+                  {% for i in mem2 %}        <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ i.photo.url }}" alt=""> {% endfor %}
                 </div>
                 <div class="p-2">
                   <h5 class="dropdown-header text-uppercase ps-2 text-dark">User Options</h5>
@@ -64,7 +69,9 @@
                 </div>
               </div>
             </li>
+           
           </ul>
+         
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
           </button>
@@ -91,7 +98,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'Contractor_PostFeedbackDetails' %}">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
-                <span class="menu-title">View Feedback Details</span>
+                <span class="menu-title">Post Feedback Details</span>
               </a>
             </li>
             <li class="nav-item">

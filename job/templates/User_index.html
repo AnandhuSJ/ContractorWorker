@@ -31,14 +31,14 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class=" navbar-brand-wrapper ">
-            <a class=" " href="User_index.html"></a><h3 class="n pt-3 pl-4">&nbsp;&nbsp;<b><i>Contractor&Worker</i></b></h3>
+            <a class=" " href="User_index.html"></a><h3 class="n pt-3 pl-4">&nbsp;&nbsp;<b><i>WeFix</i></b></h3>
             <a class="navbar-brand brand-logo" href="User_index.html"></a>
         </div> 
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           
           <ul class="navbar-nav navbar-nav-right">
           
-           {% for i in i %}
+           {% for i in mem %}
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
@@ -104,7 +104,7 @@
         
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
+          <div class="content-wrapper" style="background-image: url('/static/assets/images/SuperAdmin_index.jpg');">
             {%block content%} {%endblock%}
               
             

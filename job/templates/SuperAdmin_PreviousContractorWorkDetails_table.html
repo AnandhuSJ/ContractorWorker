@@ -8,7 +8,7 @@
           placeholder="Search...">
       </div>
       <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover" id="myTable">
         <thead>
           <tr>
             <th>Contractor ID</th>
@@ -22,6 +22,7 @@
             <th>Aadhar No</th>
             <th>Cost days/Hrs</th>
             <th>User Type</th>
+            <th>Work</th>
             <th>Status</th>
             <th>Delete</th>
           </tr>
@@ -31,7 +32,7 @@
             <tr>
               <form method="post" action="" enctype="multipart/form-data">
                 {%csrf_token%}
-              <td>{{forloop.counter}}</td>
+              <td>{{i.contractor_id}}</td>
               <td>
                 <img src="{{ i.photo.url }}" alt="image" />
                 <span class="ps-2">{{ i.fullname }}</span>
@@ -44,7 +45,8 @@
             <td>{{ i.cityandpin }}</td>
             <td>{{ i.aadharno }}</td>
             <td>{{ i.costdayshrs }}</td>
-            <td>{{ i.usertype }}</td>
+          <td>{{ i.usertype }}</td>
+          <td>{{ i.work }}</td>
             <td>{{ i.status }}</td>
             <td>
               <a id="alert2" href="#">

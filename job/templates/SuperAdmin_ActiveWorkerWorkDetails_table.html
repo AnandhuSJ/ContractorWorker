@@ -4,11 +4,11 @@
     <div class="card-body">
       <h4 class="card-title">Active Workers</h4>
       <div class="form-group">
-        <input type="text" class="form-control" onkeyup="myFunction()" id="search" name="search" autocomplete="off"
+        <input type="text" class="form-control" onkeyup="myFunction()" id="myInput" name="search" autocomplete="off"
           placeholder="Search...">
       </div>
       <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover" >
         <thead>
           <tr>
             <th>Worker ID</th>
@@ -22,18 +22,83 @@
             <th>Aadhar No</th>
             <th>Cost days/Hrs</th>
             <th>User Type</th>
+            <th>work</th>
             <th>Status</th>
             <th>Update</th>
+            <th>Worker ID</th>
             <th>Action</th>
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="myTable">
+          {% for j in CWorker %}
+          
+          <tr>
+            <form method="post" action="{% url 'SuperAdmin_ActiveWorkerWorkDetails_save' j.id %}" enctype="multipart/form-data">
+              {%csrf_token%}
+            <td>{{j.worker_id}}</td>
+            
+            <td>
+              <img src="{{ j.photo.url }}" alt="image" />
+              <span class="ps-2">{{ j.fullname }}</span>
+          </td>
+            <td>{{ j.worktype }}</td>
+            <td>{{ j.skills }}</td>
+            <td>{{ j.experience }}</td>
+            <td>{{ j.address1 }}</td>
+            <td>{{ j.address2 }}</td>
+            <td>{{ j.cityandpin }}</td>
+            <td>{{ j.aadharno }}</td>
+            <td>{{ j.costdayshrs }}</td>
+            {% if j.usertype == '' %}
+          <td><input type="text" style="width: 90px;" class="form-control" required  name="usertype" autocomplete="off" ></td>
+          {% else %}
+          <td>{{ j.usertype }}</td>
+          {% endif %}
+          {% if j.work == '' %}
+          <td><input type="text" style="width: 80px;" class="form-control" required  name="work" autocomplete="off" ></td>
+          {% else %}
+          <td>{{ j.work }}</td>
+          {% endif %}
+            <td>{{ j.status }}</td>
+            <td>
+              <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required >
+                <option style="display: none" value=""></option>
+
+
+                <option value="Pending">Pending</option>
+                <option value="Approval">Approval</option>
+                <option value="Reject">Reject</option>
+
+              </select>
+            </td>
+            {% if j.worker_id == '' %}
+            <td><input type="text" class="form-control" name="workerid" autocomplete="off" required ></td>
+            {% else %}
+            <td>{{ j.worker_id }}</td>
+            {% endif %}
+            <td>
+              <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
+            </td>
+            <td>
+              <a id="alert2" href="{% url 'SuperAdmin_ActiveWorkerWorkDetails_delete' j.id %}">
+                  <div class="badge badge-outline-danger">Delete</div>
+              </a>
+
+          </td>
+          </form>
+          </tr>
+          {% endfor %}
+
+
+
           {% for i in AWorker %}
           <tr>
             <form method="post" action="{% url 'SuperAdmin_ActiveWorkerWorkDetails_save' i.id %}" enctype="multipart/form-data">
               {%csrf_token%}
-            <td>{{forloop.counter}}</td>
+            <td>{{i.worker_id}}</td>
+            
             <td>
               <img src="{{ i.photo.url }}" alt="image" />
               <span class="ps-2">{{ i.fullname }}</span>
@@ -46,29 +111,44 @@
             <td>{{ i.cityandpin }}</td>
             <td>{{ i.aadharno }}</td>
             <td>{{ i.costdayshrs }}</td>
-            <td>{{ i.usertype }}</td>
+            {% if i.usertype == '' %}
+          <td><input type="text" style="width: 90px;" class="form-control" required  name="usertype" autocomplete="off" ></td>
+          {% else %}
+          <td>{{ i.usertype }}</td>
+          {% endif %}
+          {% if i.work == '' %}
+          <td><input type="text" style="width: 80px;" class="form-control" required  name="work" autocomplete="off" ></td>
+          {% else %}
+          <td>{{ i.work }}</td>
+          {% endif %}
             <td>{{ i.status }}</td>
             <td>
-              <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required>
+              <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required >
                 <option style="display: none" value=""></option>
 
 
-                <option value="Active">Pending</option>
-                <option value="Resign">Approval</option>
-                <option value="Resign">Reject</option>
+                <option value="Pending">Pending</option>
+                <option value="Approval">Approval</option>
+                <option value="Reject">Reject</option>
 
               </select>
             </td>
+            {% if i.worker_id == '' %}
+            <td><input type="text" class="form-control" name="workerid" autocomplete="off" required ></td>
+            {% else %}
+            <td>{{ i.worker_id }}</td>
+            {% endif %}
             <td>
               <button type="submit" class="btn btn-outline-primary btn-icon-text">
                 <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
             </td>
             <td>
-              <a id="alert2" href="#">
+              <a id="alert2" href="{% url 'SuperAdmin_ActiveWorkerWorkDetails_delete' i.id %}">
                   <div class="badge badge-outline-danger">Delete</div>
               </a>
 
           </td>
+          </form>
           </tr>
           {% endfor %}
         </tbody>
@@ -79,23 +159,40 @@
 </div>
 
 <script>
-  function myFunction() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("search");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[1];
-          if (td) {
-              txtValue = td.textContent || td.innerText;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                  tr[i].style.display = "";
-              } else {
-                  tr[i].style.display = "none";
-              }
-          }
-      }
-  }
-</script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+    {% endif %}
 {% endblock %}

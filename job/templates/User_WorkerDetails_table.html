@@ -4,7 +4,7 @@
       <div class="card-body">
         <h4 class="card-title">Active Workers</h4>
         <div class="form-group">
-          <input type="text" class="form-control" onkeyup="myFunction()" id="search" name="search" autocomplete="off"
+          <input type="text" class="form-control" onkeyup="myFunction()" id="myInput" name="search" autocomplete="off"
             placeholder="Search...">
         </div>
         <div class="table-responsive">
@@ -20,7 +20,7 @@
               <th>ViewFeedback</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="myTable">
             {% for i in workerdetails %}
             <tr>
               <td>{{forloop.counter}}</td>
@@ -28,7 +28,7 @@
                 <img src="{{ i.photo.url }}" alt="image" />
                 <span class="ps-2">{{ i.fullname }}</span>
             </td>
-            <td></td>
+            <td>{{ i.work }}</td>
             <td>{{ i.worktype }}</td>
             <td>{{ i.skills }}</td>
             <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{i.id}}">Give Feedback</button></td>
@@ -132,24 +132,14 @@
     </div>
 </div>
 {% endfor %}
-  <script>
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("search");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-  </script>
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
   {% endblock %}

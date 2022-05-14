@@ -18,17 +18,16 @@
             <th>Experience</th>
             <th>Address1</th>
             <th>Address2</th>
+            <th>Contact Number</th>
             <th>City and Pin</th>
             <th>Aadhar No</th>
             <th>Cost days/Hrs</th>
-            <th>Feedback</th>
-            <th>ViewFeedback</th>
           </tr>
         </thead>
         <tbody>
           {% for i in myregister %}
           <tr>
-            <td>{{forloop.counter}}</td>
+            <td>{{i.worker_id}}</td>
             <td>
               <img src="{{ i.photo.url }}" alt="image" />
               <span class="ps-2">{{ i.fullname }}</span>
@@ -38,13 +37,10 @@
           <td>{{ i.experience }}</td>
           <td>{{ i.address1 }}</td>
           <td>{{ i.address2 }}</td>
+          <td>{{ i.mobile }}</td>
           <td>{{ i.cityandpin }}</td>
           <td>{{ i.aadharno }}</td>
           <td>{{ i.costdayshrs }}</td>
-            <td><a href="{% url 'User_PostFeedback' %}"><button class="btn btn-danger">Feedback</button></a></td>
-            <td><button type="button" class="btn btn-sm mx-1 text-light" style="background: rgb(65, 3, 3)"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <i class="mdi mdi-comment-multiple-outline"></i> Message </button></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -53,23 +49,6 @@
     </div>
   </div>
 </div>
-
-
-<!-- message Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Messege</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              {{i.messege}}
-          </div>
-      </div>
-  </div>
-</div>
-<!-- message Modal ends -->
 
 <script>
   function myFunction() {

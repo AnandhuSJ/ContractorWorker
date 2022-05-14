@@ -15,23 +15,16 @@
   <div class="col-12 col-sm-12 col-md-12 col-lg-9 grid-margin">
     <div class="card mt-3 mb-5">
       <div class="card-body">
-        <form class="form-sample" action="{% url 'User_MyProfileUpdatessave' user.id %}"  method="post" enctype="multipart/form-data">
+        <form class="form-sample" action=""  method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="row">
             <div class="col-8 col-sm-8 col-md-10 col-lg-10 mt-3">
-              <h4 class="card-description text-dark font-weight-normal"> Update User Contact Details </h4>
+              <h4 class="card-description text-dark font-weight-normal">User Contact Details </h4>
             </div>
           </div>
           <p class="card-description text-dark font-weight-normal"> Personal details </p>
           <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-              <div class="form-group row">
-                <label class="col-6 col-sm-6 col-md-6 col-lg-3 col-form-label text-dark font-weight-normal">ID:</label>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                  <p class="mt-2 text-dark font-weight-normal">{{ user.id }}</p>
-                </div>
-              </div>
-            </div>
+           
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
               <div class="form-group row">
                 <label class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label text-dark font-weight-normal">Full
@@ -83,11 +76,11 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <center>
               <button class="btn btn-primary">Update</button>
             </center>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>

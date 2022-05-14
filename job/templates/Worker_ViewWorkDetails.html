@@ -1,76 +1,176 @@
 {% extends 'Worker_index.html'%} {% load static %} {% block content %}
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Active Workers</h4>
-            <div class="form-group">
-                <input type="text" class="form-control" onkeyup="myFunction()" id="search" name="search"
-                    autocomplete="off" placeholder="Search...">
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Worker ID</th>
-                            <th>Worker Name</th>
-                            <th>Worker Type</th>
-                            <th>Skills</th>
-                            <th>Experience</th>
-                            <th>Address1</th>
-                            <th>Address2</th>
-                            <th>City and Pin</th>
-                            <th>Aadhar No</th>
-                            <th>Cost days/Hrs</th>
-                            <th>Status</th>
-                            <th>Update</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for i in workerdetails %}
-                        <tr>
-                            <td>{{forloop.counter}}</td>
-                            <td>
-                                <img src="{{ i.photo.url }}" alt="image" />
-                                <span class="ps-2">{{ i.fullname }}</span>
-                            </td>
-                            <td>{{ i.worktype }}</td>
-                            <td>{{ i.skills }}</td>
-                            <td>{{ i.experience }}</td>
-                            <td>{{ i.address1 }}</td>
-                            <td>{{ i.address2 }}</td>
-                            <td>{{ i.cityandpin }}</td>
-                            <td>{{ i.aadharno }}</td>
-                            <td>{{ i.costdayshrs }}</td>
-                            <td>{{ i.status }}</td>
-                            <td><a href="{% url 'Worker_UpdateWorkDetails' %}"><button
-                                        class="btn btn-primary">Update</button></a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("search");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>
+<style>
+  #choose::file-selector-button {
+    background-color: rgb(37, 125, 207);
+
+
+  }
+</style>
+
+
+
+{% for i in workerdetails %}
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-9 grid-margin">
+    <div class="card mt-3 mb-5">
+      <div class="card-body">
+        <form class="form-sample" action="{% url 'Worker_UpdateWorkDetails' i.id %}"  method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-8 col-sm-8 col-md-10 col-lg-10 mt-3">
+              <h4 class="card-description text-dark font-weight-normal">Worker Details </h4>
+            </div>
+          </div>
+          <h6 class="card-description text-dark font-weight-normal"> Personal details </h6>
+          <div class="row">
+           
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Worker ID:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{i.worker_id}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group row">
+                  <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Worker Name:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <p class="mt-2 text-dark font-weight-normal">{{ i.fullname }}</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Worker Type:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.worktype }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Skills:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.skills }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Experience:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.experience }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Address1:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.address1 }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Address2:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.address2 }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">CityandPin:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.cityandpin }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Aadhar No:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.aadharno }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Cost days/Hrs:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.costdayshrs }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label text-dark font-weight-normal">Status</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="mt-2 text-dark font-weight-normal">{{ i.status }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+           <div class="row">
+            <center>
+              <button class="btn btn-primary">Update</button>
+            </center>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endfor %} 
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+    {% endif %}
 {% endblock %}

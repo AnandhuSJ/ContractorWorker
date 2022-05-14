@@ -32,46 +32,43 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class=" navbar-brand-wrapper ">
-            <a class=" " href="Contractor_index.html"></a><h3 class="n pt-3 pl-4">&nbsp;&nbsp;<b><i>Contractor&Worker</i></b></h3>
+            <a class=" " href="Contractor_index.html"></a><h3 class="n pt-3 pl-4">&nbsp;&nbsp;<b><i>WeFix</i></b></h3>
             <a class="navbar-brand brand-logo" href="Contractor_index.html"></a>
         </div> 
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-          
-       
+         
+       {% for j in mem2 %}
           <ul class="navbar-nav navbar-nav-right">
-            
-           
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  {% for i in mem2 %}  <img src="{{ i.photo.url }}" alt="image"> {% endfor %}
+                   <img src="{{ j.photo.url }}" alt="image"> 
                 </div>
                 <div class="nav-profile-text">
-                  {% for i in mem2 %}     <p class="mb-1 text-black">{{ i.fullname }}</p> {% endfor %}
+                    <p class="mb-1 text-black">{{ j.fullname }}</p> 
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
                 <div class="p-3 text-center bg-primary">
-                  {% for i in mem2 %}        <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ i.photo.url }}" alt=""> {% endfor %}
-                </div>
+                      <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ j.photo.url }}" alt=""> 
+                      </div>
                 <div class="p-2">
                   <h5 class="dropdown-header text-uppercase ps-2 text-dark">User Options</h5>
-                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{% url 'Contractor_Accsetting' %}">
+                  <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{% url 'Contractor_Accsetting'%}">
                     <span>Settings</span>
-                    <i class="mdi mdi-settings"></i>
+                    
                   </a>
                   <div role="separator" class="dropdown-divider"></div>
                   <h5 class="dropdown-header text-uppercase  ps-2 text-dark mt-2">Actions</h5>
                   <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{% url 'Contractor_logout' %}">
                     <span>Log Out</span>
-                    <i class="mdi mdi-logout ms-1"></i>
+                   
                   </a>
                 </div>
               </div>
-            </li>
-           
+            </li> 
           </ul>
-         
+        
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
           </button>
@@ -81,6 +78,7 @@
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
+        {% endfor %}
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
@@ -95,12 +93,12 @@
                 <span class="menu-title">View Work Details</span>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="{% url 'Contractor_PostFeedbackDetails' %}">
                 <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                 <span class="menu-title">Post Feedback Details</span>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'Contractor_MyProfile' %}">
                   <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
@@ -111,7 +109,7 @@
         </nav>
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
+          <div class="content-wrapper" style="background-image: url('/static/assets/images/SuperAdmin_index.jpg');">
             {%block content%} {%endblock%}
               
             
@@ -139,5 +137,33 @@
     <!-- Custom js for this page -->
     <script src="{% static 'assets/js/dashboard.js' %}"></script>
     <!-- End custom js for this page -->
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+    {% endif %}
+
   </body>
 </html>

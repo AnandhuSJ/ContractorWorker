@@ -1,5 +1,5 @@
 {% extends 'Worker_index.html'%} {% load static %} {% block content %}
-
+{% for i in mem1 %}
       <div class="row">
 
         <div class="col-md-10 grid-margin stretch-card">
@@ -7,72 +7,72 @@
             <div class="card-body">
               <h4 class="card-title" >Update Work Details</h4><br><br>
 
-              <form class="forms-sample" method="post" enctype="multipart/form-data">
+              <form class="forms-sample" action="{% url 'Worker_UpdateWorkDetailssave' i.id %}" method="post" enctype="multipart/form-data">
               {% csrf_token %}
                 <div class="form-group row">
                   <label for="exampleInputWorkerId" class="col-sm-3 col-form-label text-dark font-weight-normal">Worker ID</label>
                   <div class="col-sm-9">
-                    <input type="text" name="id" class="form-control" id="exampleInputWorkerId"  required>
+                    <input type="text" name="workerid" class="form-control" id="exampleInputWorkerId" value="{{i.worker_id}}"  required>
                   </div>
                 </div>
                  <div class="form-group row">
                   <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Worker Name</label>
                   <div class="col-sm-9">
-                    <input type="text" name="workername" class="form-control" id="exampleInputEmail"  required>
+                    <input type="text" name="workername" class="form-control" id="exampleInputEmail" value="{{i.fullname}}"  required>
                   </div>
                 </div>
                 <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Worker Type</label>
                     <div class="col-sm-9">
-                      <input type="text" name="workertype" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="workertype" class="form-control" id="exampleInputEmail" value="{{i.worktype}}" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Skills</label>
                     <div class="col-sm-9">
-                      <input type="text" name="skills" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="skills" class="form-control" id="exampleInputEmail" value="{{i.skills}}" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Experience</label>
                     <div class="col-sm-9">
-                      <input type="text" name="experience" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="experience" class="form-control" id="exampleInputEmail" value="{{i.experience}}" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Address1</label>
                     <div class="col-sm-9">
-                      <input type="text" name="address1" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="address1" class="form-control" id="exampleInputEmail" value="{{i.address1}}" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Address2</label>
                     <div class="col-sm-9">
-                      <input type="text" name="address2" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="address2" class="form-control" id="exampleInputEmail" value="{{i.address2}}" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">City and Pin</label>
                     <div class="col-sm-9">
-                      <input type="text" name="cityandpin" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="cityandpin" class="form-control" id="exampleInputEmail" value="{{ i.cityandpin }}"  required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Mobile No</label>
                     <div class="col-sm-9">
-                      <input type="text" name="mobile" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="mobile" class="form-control" id="exampleInputEmail"  value="{{ i.mobile }}" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Aadhar No</label>
                     <div class="col-sm-9">
-                      <input type="text" name="aadharno" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="aadharno" class="form-control" id="exampleInputEmail" value="{{ i.aadharno }}"  required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="exampleInputEmail" class="col-sm-3 col-form-label text-dark font-weight-normal">Cost days/Hrs</label>
                     <div class="col-sm-9">
-                      <input type="text" name="costdayshrs" class="form-control" id="exampleInputEmail"  required>
+                      <input type="text" name="costdayshrs" class="form-control" id="exampleInputEmail" value="{{ i.costdayshrs }}" required>
                     </div>
                   </div>
 
@@ -87,6 +87,7 @@
 
     <!-- partial -->
   </div>
+  {% endfor %}
   <!-- main-panel ends -->
   <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -53,11 +53,13 @@ urlpatterns = [
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_save/(?P<id>\d+)/$', views.SuperAdmin_ActiveWorkerWorkDetails_save, name='SuperAdmin_ActiveWorkerWorkDetails_save'),
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_delete/(?P<id>\d+)/$', views.SuperAdmin_ActiveWorkerWorkDetails_delete, name='SuperAdmin_ActiveWorkerWorkDetails_delete'),
      re_path(r'^SuperAdmin_PreviousWorkerWorkDetails_table$', views.SuperAdmin_PreviousWorkerWorkDetails_table, name='SuperAdmin_PreviousWorkerWorkDetails_table'),
+     re_path(r'^SuperAdmin_PreviousWorkerWorkDetails_delete/(?P<id>\d+)/$', views.SuperAdmin_PreviousWorkerWorkDetails_delete, name='SuperAdmin_PreviousWorkerWorkDetails_delete'),
      re_path(r'^SuperAdmin_ContractorWorkDetails_cards$', views.SuperAdmin_ContractorWorkDetails_cards, name='SuperAdmin_ContractorWorkDetails_cards'),
      re_path(r'^SuperAdmin_ActiveContractorWorkDetails_table$', views.SuperAdmin_ActiveContractorWorkDetails_table, name='SuperAdmin_ActiveContractorWorkDetails_table'),
      re_path(r'^SuperAdmin_ActiveContractWorkDetails_save/(?P<id>\d+)/$', views.SuperAdmin_ActiveContractWorkDetails_save, name='SuperAdmin_ActiveContractWorkDetails_save'),
      re_path(r'^SuperAdmin_ActiveContractWorkDetails_delete/(?P<id>\d+)/$', views.SuperAdmin_ActiveContractWorkDetails_delete, name='SuperAdmin_ActiveContractWorkDetails_delete'),
      re_path(r'^SuperAdmin_PreviousContractorWorkDetails_table$', views.SuperAdmin_PreviousContractorWorkDetails_table, name='SuperAdmin_PreviousContractorWorkDetails_table'),
+     re_path(r'^SuperAdmin_PreviousContractorWorkDetails_delete/(?P<id>\d+)/$', views.SuperAdmin_PreviousContractorWorkDetails_delete, name='SuperAdmin_PreviousContractorWorkDetails_delete'),
      re_path(r'^SuperAdmin_UserDetails$', views.SuperAdmin_UserDetails, name='SuperAdmin_UserDetails'),
 
      

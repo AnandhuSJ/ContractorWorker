@@ -207,6 +207,7 @@ def SuperAdmin_ActiveWorkerWorkDetails_save(request,id):
             b.save()
             msg_success = "Details Updated successfully"
             return render(request,'SuperAdmin_WorkerWorkDetails_cards.html', {'msg_success': msg_success})
+
 def SuperAdmin_ActiveWorkerWorkDetails_delete(request,id):
     try:
          a = user_registration.objects.get(id=id)
@@ -284,6 +285,7 @@ def SuperAdmin_ActiveContractWorkDetails_save(request,id):
             b.save()
             msg_success = "Details Updated successfully"
             return render(request,'SuperAdmin_ContractorWorkDetails_cards.html', {'msg_success': msg_success})
+            
 def SuperAdmin_ActiveContractWorkDetails_delete(request,id):
     try:
          a = user_registration.objects.get(id=id)
@@ -307,6 +309,15 @@ def SuperAdmin_PreviousContractorWorkDetails_table(request):
       else:
         return redirect('/')
 
+def SuperAdmin_PreviousContractorWorkDetails_delete(request,id):
+    try:
+         a = user_registration.objects.get(id=id)
+         a.delete()
+         msg_success = "Worker Deleted successfully"
+         return render(request,'SuperAdmin_ContractorWorkDetails_cards.html', {'msg_success': msg_success})
+    except:
+          msg_success = "Could Not Be Deleted Because of Foreign Key constraints Referenced"
+          return render(request,'SuperAdmin_ContractorWorkDetails_cards.html', {'msg_success': msg_success})
 
 def SuperAdmin_UserDetails(request):
        if 'SAdm_id' in request.session:

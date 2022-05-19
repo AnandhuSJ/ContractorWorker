@@ -208,6 +208,20 @@ def SuperAdmin_ActiveWorkerWorkDetails_save(request,id):
             msg_success = "Details Updated successfully"
             return render(request,'SuperAdmin_WorkerWorkDetails_cards.html', {'msg_success': msg_success})
 
+def SuperAdmin_MakeContractor(request,id):
+    if 'SAdm_id' in request.session:
+         if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+         users = User.objects.filter(id=SAdm_id)
+    user = user_registration.objects.get(id=id)
+    Contractor = designation.objects.get(designation='Contractor')
+    user.designation = Contractor
+    user.save()
+    msg_success = "Worker Changed to Contractor successfully"
+    return render(request,'SuperAdmin_WorkerWorkDetails_cards.html', {'msg_success': msg_success})
+    
+
+
 def SuperAdmin_ActiveWorkerWorkDetails_delete(request,id):
     try:
          a = user_registration.objects.get(id=id)

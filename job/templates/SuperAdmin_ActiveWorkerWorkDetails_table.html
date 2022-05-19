@@ -23,6 +23,7 @@
             <th>Cost days/Hrs</th>
             <th>User Type</th>
             <th>work</th>
+            <th>Add as Contractor</th>
             <th>Status</th>
             <th>Update</th>
             <th>Worker ID</th>
@@ -60,6 +61,13 @@
           {% else %}
           <td>{{ j.work }}</td>
           {% endif %}
+          <td>
+            <a href="{% url 'SuperAdmin_MakeContractor' j.id %}">
+              <button type="button" class="btn btn-sm btn-success btn-icon-text">
+                <i class="ti-plus btn-icon-prepend"></i>
+                Add Conntractor
+              </button></a>
+          </td>
             <td>{{ j.status }}</td>
             <td>
               <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required >
@@ -121,6 +129,13 @@
           {% else %}
           <td>{{ i.work }}</td>
           {% endif %}
+          <td>
+            <a href="{% url 'SuperAdmin_MakeContractor' i.id %}">
+              <button type="button" class="btn btn-sm btn-success btn-icon-text">
+                <i class="ti-plus btn-icon-prepend"></i>
+                Add Conntractor
+              </button></a>
+          </td>
             <td>{{ i.status }}</td>
             <td>
               <select class="badge badge-outline-primary text-dark font-weight-normal" name="status" required >

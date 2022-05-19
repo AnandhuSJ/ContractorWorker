@@ -51,6 +51,7 @@ urlpatterns = [
      re_path(r'^SuperAdmin_WorkerWorkDetails_cards$', views.SuperAdmin_WorkerWorkDetails_cards, name='SuperAdmin_WorkerWorkDetails_cards'),
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_table$', views.SuperAdmin_ActiveWorkerWorkDetails_table, name='SuperAdmin_ActiveWorkerWorkDetails_table'),
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_save/(?P<id>\d+)/$', views.SuperAdmin_ActiveWorkerWorkDetails_save, name='SuperAdmin_ActiveWorkerWorkDetails_save'),
+     re_path(r'^SuperAdmin_MakeContractor/(?P<id>\d+)/$', views.SuperAdmin_MakeContractor, name='SuperAdmin_MakeContractor'),
      re_path(r'^SuperAdmin_ActiveWorkerWorkDetails_delete/(?P<id>\d+)/$', views.SuperAdmin_ActiveWorkerWorkDetails_delete, name='SuperAdmin_ActiveWorkerWorkDetails_delete'),
      re_path(r'^SuperAdmin_PreviousWorkerWorkDetails_table$', views.SuperAdmin_PreviousWorkerWorkDetails_table, name='SuperAdmin_PreviousWorkerWorkDetails_table'),
      re_path(r'^SuperAdmin_PreviousWorkerWorkDetails_delete/(?P<id>\d+)/$', views.SuperAdmin_PreviousWorkerWorkDetails_delete, name='SuperAdmin_PreviousWorkerWorkDetails_delete'),
